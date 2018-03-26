@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "touchscreen-study-touchscreenstudy", "touchscreen-study-touchscreenstudy.csproj", "{A22088C5-D31E-EB81-A584-1D0301592BA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "touchscreen-study-touchscreenstudy.Editor", "touchscreen-study-touchscreenstudy.Editor.csproj", "{B3B565EF-78EC-B629-6359-67FF4B6D383A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A22088C5-D31E-EB81-A584-1D0301592BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22088C5-D31E-EB81-A584-1D0301592BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22088C5-D31E-EB81-A584-1D0301592BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22088C5-D31E-EB81-A584-1D0301592BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B565EF-78EC-B629-6359-67FF4B6D383A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B565EF-78EC-B629-6359-67FF4B6D383A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B565EF-78EC-B629-6359-67FF4B6D383A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B565EF-78EC-B629-6359-67FF4B6D383A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
