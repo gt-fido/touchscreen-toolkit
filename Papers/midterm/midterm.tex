@@ -167,10 +167,9 @@
     \keywords{\plainkeywords}
 
     \section{Introduction}
-    The goal of this project is to create a platform on which interactions between dogs and touchscreen interfaces can be studied and expanded upon. Dogs are frequently able to take many complex tasks upon themselves in the service and assistance field, so it stands to reason that they would also be capable of learning electronic systems. Dogs could be trained to do things like dialing 911 if their owner was having a seizure, for example. While this is still very early, this research aims to create various kinds of testing interfaces that dogs can interact with.
-
-
-    \section{Previous Work}
+        Touchscreens are ubiquitous in our daily lives, from our phones to our watches we have made great use of touchscreen displays to explore many use cases. Good touchscreen interactions are the focus of much HCI research because of its ubiquity. As with most other forms of technology though, interfaces have been developed with a human audience in mind. However, dogs are frequently able to take many complex tasks upon themselves and have demonstrated ability to interact with touchscreen displays among other technologies \cite{Zeagler2016,Zeagler2014,Wallis2017,Aust2008,Zeagler2016a,Byrne2014}. With the rising field of ACI, more and more interfaces will be designed for animals on touchscreen devices however there is little information on which interfaces are transferable between species and ways to evaluate interfaces. This severely limits a designer’s ability to design a truly user-centered application.
+    
+    \section{Background and Related Work}
     \subsection{Animal Cognition}
         Animal cognition research until recently believed dogs to be too changed by their domestication to have any interesting cognitive ability worthy of study. Recently though, the perception of dog cognition has significantly improved such that most animal cognitive studies make use of them. Obtaining subjects is relatively easy as much of the population have companion dogs and cognitive studies have low risk of injury. Additionally, all one needs to run a dog study is an empty room \cite{Morell2009}.
         
@@ -204,12 +203,19 @@
         
         Most relevant to this work however, is the work done by Zeagler et al. on an emergency alert system that is operated by a service dog when at home. The authors identified several pitfalls when designing a digital interface for dogs. First, that a capacitive touchscreen after some use will become non-responsive because of accumulated slobber. To fix this, an infrared-based touchscreen is advised. Additionally, it was discovered that a constantly emitting display such as an LED monitor is preferable to say a projector which, because of its method of color emittance, caused the dogs to lose the button positions. Finally, the authors find that larger buttons are preferable as the dog is interacting with its nose and therefore does not have a full view of the screen \cite{Zeagler2014}.
 
-    \section{Your Work}
-        So far, we have prototyped out the beginning of a yellow slider in unity that responds to touch as an interface. This so far is only the beginning. We hope to provide a variety of different sliders that I will describe, and a couple of which are shown below.
+    \section{Metrics}
+        As animals are unable to provide responses to a provided interface in the traditional sense, metrics must be studied to gain insight into an interface’s efficacy. Here we measure the velocity of the interaction, the tapping pressure, accuracy of touch, and force exerted in a direction. In addition to these we will be measuring how long the interface takes for an animal to use and the path that the animal’s interaction takes if it is a draggable interface as the slider is. We believe these metrics are key in determining a dog’s feeling about an interface, especially when used in concert with a physical observation of the task being done.
 
-        In the preliminary research, the dogs were shown 3 different colored circles that each played different tones when pressed on the screen. We hope to provide the same level of variety here. As you can see on the prototyped drawings, we want to show different shapes/colors to see if they possibly changed the responses that the dogs showed. We also what to have sliders that would change the background color as they slid along the gradient to see if they affected behavior.
+    \section{Slider Interface}
+        Multiple variations of a slider were designed for the interface to test different aspects of a dog’s ability to understand interfaces. The first interface design is simple, it is a horizontal slider with differently shaped handles, some with directionality to them and others that have missing parts. It is important to note that in all these interfaces, the parts can be swapped so that colors, shapes, tracks, etc. can be modified independently. The interfaces are designed to be fully rotatable and scalable as well to create even more variations for testing.
 
-        Lastly and most complex we have drafted some much more difficult ones. The idea behind these represent multi step tasks for the dogs. One of the sliders would have a dip in the middle, and another might be U or S shaped, to make the trail more difficult for the dog to follow. Another would be a slider that would rotate as it was moved, to make it harder to move in a straight line. This would be something similar to what would be required of using a website, for example.
+        Another variation of the slider that is drafted below changes colors in the interface as the dog moves the handle along the track. One changes the color of the handle only and could give insight into how much the dog pays attention to the color cues when interacting or if the color can actually be perceived when so close to the display. Another transitions the colors as the slider is being moved, allowing the dog to see the color change more clearly.
+
+        Audio cues are thought to be important to dogs when they cannot visually obtain an idea of progression. Additionally, audio cues are very important to training and choosing the correct audio could positively impact their reward when correctly using the interface. To this end, several audio cues have been explored. A rising or lowering pitch as the slider moves is a possible cue as is one that increases at certain thresholds. Overall, audio cues are important to the experience of the interface and more options are being explored.
+
+        Adding a physicality to the slider is another interesting interaction that we believe will improve the interface for a dog. By giving the handle physical attributes like rolling downward when released on a slant, we believe the dog will become more engaged with the interface. Additionally, this interaction could be useful for training easily distracted dogs to use the touchscreen.
+
+        The most difficult interface we designed represent cognitively difficult tasks for the dogs. One of the sliders would have a dip in the middle, and another might be U or S shaped, to make the trail more difficult for the dog to follow. Another would be a slider that would rotate as it was moved, to make it harder to move in a straight line. This would be something similar to what would be required of using a website, for example.
     
     \section{Future Work}
         Our future work from here on lies entirely in the implementation of the plans we set out in the previous section. Obviously a large part of this is going to be in the coding of these to work as actually described. We believe that we can at the very least get the multiple shape and color ones working correctly, using multiple different sounds. We are also in the process of trying to find dogs that we can test with to see if our prototypes perform as expected. This will probably require creating interfaces that work for outputting testing data as well instead of simply going for a proof of concept.
@@ -219,5 +225,33 @@
 
     \bibliography{midterm}
     \bibliographystyle{SIGCHI-Reference-Format}
+
+    \clearpage
+
+    \appendix
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth/2]{figures/slider_shapes.png}
+            \caption{Different shapes and colors for the slider handle (kept in dog's visible color spectrum).}
+            \label{fig:mockup1}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth/4]{figures/curved-slider.png}
+            \caption{A mockup of a challenging slider.}
+            \label{fig:mockup2}
+        \end{figure}
+        \begin{figure}[b]
+            \centering
+            \includegraphics[height=\textheight/2]{figures/handle_change.png}
+            \caption{Changing color handle as slid from beginning to end.}
+            \label{fig:mockup3}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[height=\textheight]{figures/background-transition.png}
+            \caption{Illustration of how a background transition could occur.}
+            \label{fig:mockup4}
+        \end{figure}
 
 \end{document}
