@@ -1,51 +1,170 @@
-\documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
-\usepackage{cite}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
-\usepackage{graphicx}
-\usepackage{textcomp}
-\usepackage{xcolor}
+\documentclass{sigchi}
 
-\begin{document}
-    \title{Slider Interface for Animals\\}
+    % Use this section to set the ACM copyright statement (e.g. for
+    % preprints).  Consult the conference website for the camera-ready
+    % copyright statement.
+    
+    % Copyright
+    \CopyrightYear{2016}
+    %\setcopyright{acmcopyright}
+    \setcopyright{acmlicensed}
+    %\setcopyright{rightsretained}
+    %\setcopyright{usgov}
+    %\setcopyright{usgovmixed}
+    %\setcopyright{cagov}
+    %\setcopyright{cagovmixed}
+    % DOI
+    \doi{http://dx.doi.org/10.475/123_4}
+    % ISBN
+    \isbn{123-4567-24-567/08/06}
+    %Conference
+    \conferenceinfo{CHI'16,}{May 07--12, 2016, San Jose, CA, USA}
+    %Price
+    \acmPrice{\$15.00}
+    
+    % Use this command to override the default ACM copyright statement
+    % (e.g. for preprints).  Consult the conference website for the
+    % camera-ready copyright statement.
+    
+    %% HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+    %% Please note you need to make sure the copy for your specific
+    %% license is used here!
+    % \toappear{
+    % Permission to make digital or hard copies of all or part of this work
+    % for personal or classroom use is granted without fee provided that
+    % copies are not made or distributed for profit or commercial advantage
+    % and that copies bear this notice and the full citation on the first
+    % page. Copyrights for components of this work owned by others than ACM
+    % must be honored. Abstracting with credit is permitted. To copy
+    % otherwise, or republish, to post on servers or to redistribute to
+    % lists, requires prior specific permission and/or a fee. Request
+    % permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}. \\
+    % \emph{CHI '16},  May 07--12, 2016, San Jose, CA, USA \\
+    % ACM xxx-x-xxxx-xxxx-x/xx/xx\ldots \$15.00 \\
+    % DOI: \url{http://dx.doi.org/xx.xxxx/xxxxxxx.xxxxxxx}
+    % }
+    
+    % Arabic page numbers for submission.  Remove this line to eliminate
+    % page numbers for the camera ready copy
+    % \pagenumbering{arabic}
+    
+    % Load basic packages
+    \usepackage{balance}       % to better equalize the last page
+    \usepackage{graphics}      % for EPS, load graphicx instead 
+    \usepackage[T1]{fontenc}   % for umlauts and other diaeresis
+    \usepackage{txfonts}
+    \usepackage{mathptmx}
+    \usepackage[pdflang={en-US},pdftex]{hyperref}
+    \usepackage{color}
+    \usepackage{booktabs}
+    \usepackage{textcomp}
+    
+    % Some optional stuff you might like/need.
+    \usepackage{microtype}        % Improved Tracking and Kerning
+    % \usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
+    \usepackage{ccicons}          % Cite your images correctly!
+    % \usepackage[utf8]{inputenc} % for a UTF8 editor only
+    
+    % If you want to use todo notes, marginpars etc. during creation of
+    % your draft document, you have to enable the "chi_draft" option for
+    % the document class. To do this, change the very first line to:
+    % "\documentclass[chi_draft]{sigchi}". You can then place todo notes
+    % by using the "\todo{...}"  command. Make sure to disable the draft
+    % option again before submitting your final document.
+    \usepackage{todonotes}
+    
+    % Paper metadata (use plain text, for PDF inclusion and later
+    % re-using, if desired).  Use \emtpyauthor when submitting for review
+    % so you remain anonymous.
+    \def\plaintitle{SIGCHI Animal Interface Framework}
+    \def\plainauthor{Jacob Logas, Will Mitchell, Monira Khan, Lorita Freeman}
+    \def\emptyauthor{}
+    \def\plainkeywords{touchscreen; dog; framework; user interface; animal-computer interaction; required.}
+    \def\plaingeneralterms{Documentation, Standardization}
 
-    \author{\IEEEauthorblockN{1\textsuperscript{st} Jacob Logas}
-    \IEEEauthorblockA{\textit{College of Computing} \\
-    \textit{Georgia Institute of Technology}\\
-    Atlanta, GA, United States \\
-    logasja@gatech.edu}
-    \and
-    \IEEEauthorblockN{2\textsuperscript{nd} Will Mitchell}
-    \IEEEauthorblockA{\textit{College of Computing} \\
-    \textit{Georgia Institute of Technology}\\
-    Atlanta, GA, United States \\
-    wmitchell30@gatech.edu}
-    \and
-    \IEEEauthorblockN{3\textsuperscript{rd} Monira Khan}
-    \IEEEauthorblockA{\textit{College of Computing} \\
-    \textit{Georgia Institute of Technology}\\
-    Atlanta, GA, United States \\
-    monirakhan@gatech.edu}
-    \and
-    \IEEEauthorblockN{4\textsuperscript{th} Lorita Freeman}
-    \IEEEauthorblockA{\textit{College of Computing} \\
-    \textit{Georgia Institute of Technology}\\
-    Atlanta, GA, United States \\
-    lorita.freeman@gatech.edu}
+    % llt: Define a global style for URLs, rather that the default one
+    \makeatletter
+    \def\url@leostyle{%
+      \@ifundefined{selectfont}{
+        \def\UrlFont{\sf}
+      }{
+        \def\UrlFont{\small\bf\ttfamily}
+      }}
+    \makeatother
+    \urlstyle{leo}
+    
+    % To make various LaTeX processors do the right thing with page size.
+    \def\pprw{8.5in}
+    \def\pprh{11in}
+    \special{papersize=\pprw,\pprh}
+    \setlength{\paperwidth}{\pprw}
+    \setlength{\paperheight}{\pprh}
+    \setlength{\pdfpagewidth}{\pprw}
+    \setlength{\pdfpageheight}{\pprh}
+    
+    % Make sure hyperref comes last of your loaded packages, to give it a
+    % fighting chance of not being over-written, since its job is to
+    % redefine many LaTeX commands.
+    \definecolor{linkColor}{RGB}{6,125,233}
+    \hypersetup{%
+      pdftitle={\plaintitle},
+    % Use \plainauthor for final version.
+    %  pdfauthor={\plainauthor},
+      pdfauthor={\emptyauthor},
+      pdfkeywords={\plainkeywords},
+      pdfdisplaydoctitle=true, % For Accessibility
+      bookmarksnumbered,
+      pdfstartview={FitH},
+      colorlinks,
+      citecolor=black,
+      filecolor=black,
+      linkcolor=black,
+      urlcolor=linkColor,
+      breaklinks=true,
+      hypertexnames=false
     }
     
-    \maketitle    
+    % create a shortcut to typeset table headings
+    % \newcommand\tabhead[1]{\small\textbf{#1}}
+
+
+% End of preamble. Here it comes the document.
+\begin{document}
+
+    \title{\plaintitle}
+
+    \numberofauthors{4}
+    \author{%
+    \alignauthor{Jacob Logas\\
+        \affaddr{Georgia Institute of Technology}\\
+        \affaddr{Atlanta, GA 30332, USA}\\
+        \email{logasja@gatech.edu}}\\
+    \alignauthor{Will Mitchell\\
+        \affaddr{Georgia Institute of Technology}\\
+        \affaddr{Atlanta, GA 30332, USA}\\
+        \email{wmitchell30@gatech.edu}}\\
+    \alignauthor{Monira Khan\\
+        \affaddr{Georgia Institute of Technology}\\
+        \affaddr{Atlanta, GA 30332, USA}\\
+        \email{monirakhan@gatech.edu}}\\
+    \alignauthor{Lorita Freeman\\
+        \affaddr{Georgia Institute of Technology}\\
+        \affaddr{Atlanta, GA 30332, USA}\\
+        \email{lorita.freeman@gatech.edu}}\\
+    }
+
+    \maketitle
 
     \begin{abstract}
-    Touchscreens have become ubiquitous in technology, allowing any number of interfaces to be created for the display. In the past, interfaces have been created for dogs however many have made liberal use of buttons and not other user interface interactions that are common in human interfaces. Here, we developed a framework on which interfaces can be built and tested with metrics such as touch position over time and time to complete. To demonstrate the framework’s efficacy, we build a simple slider interface that can be modified in a variety of ways. Our hope is this framework can be used to quantifiably evaluate interfaces created for animals.
+        In the past, touchscreen interfaces created for dogs have made liberal use of buttons and avoided other user interfaces common in human applications. Here, we present a framework on which interfaces can be developed and tested. The framework obtains with metrics such as touch position over time and time to complete. To demonstrate the framework’s efficacy, we build a simple slider interface with various variable attributes that we will then use to study how a dog interacts with a slider. Our hope is this framework can be used to quantifiably evaluate interfaces created for animals.
     \end{abstract}
 
-    \begin{IEEEkeywords}
-        component, formatting, style, styling, insert
-    \end{IEEEkeywords}
+    \category{H.5.m.}{Information Interfaces and Presentation
+    (e.g. HCI)}{Miscellaneous} \category{See
+    \url{http://acm.org/about/class/1998/} for the full list of ACM
+    classifiers. This section is required.}{}{}
 
+    \keywords{\plainkeywords}
 
     \section{Introduction}
     The goal of this project is to create a platform on which interactions between dogs and touchscreen interfaces can be studied and expanded upon. Dogs are frequently able to take many complex tasks upon themselves in the service and assistance field, so it stands to reason that they would also be capable of learning electronic systems. Dogs could be trained to do things like dialing 911 if their owner was having a seizure, for example. While this is still very early, this research aims to create various kinds of testing interfaces that dogs can interact with.
@@ -99,6 +218,6 @@
         Research based on dogs, technology, and touchscreens has been in the works for a long time. With this project, we wanted to expand on the current research by creating a variety of interfaces to see how dogs react and interact with them. Testing the dogs’ capabilities with different interfaces will show us what adjustments and improvements we can make to these interfaces. This opens up the possibilities of what dogs will be able to do with technology in the future. Service dogs, police dogs, and even our pets can already aid us in so many ways, and with the progression of this research our companions will be able to take on greater roles in our lives and in our society.
 
     \bibliography{midterm}
-    \bibliographystyle{ieeetr}
+    \bibliographystyle{SIGCHI-Reference-Format}
 
 \end{document}

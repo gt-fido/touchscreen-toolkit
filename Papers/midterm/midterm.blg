@@ -1,49 +1,57 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: midterm.aux
-The style file: ieeetr.bst
+The style file: SIGCHI-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: midterm.bib
-Warning--empty journal in Resner2001
-Warning--empty journal in Paci2016
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty address in Garton2001
+Warning--no journal in Paci2016
+Warning--unusual to have number, but no volume, for Paci2016
+Warning--no journal in Resner2001
+Warning--no number and no volume in Resner2001
+Warning--no number and no volume in Zeagler2016a
+Warning--no number and no volume in Zeagler2014
 You've used 17 entries,
-            1876 wiz_defined-function locations,
-            605 strings with 6980 characters,
-and the built_in function-call counts, 5454 in all, are:
-= -- 557
-> -- 209
-< -- 0
-+ -- 76
-- -- 59
-* -- 410
-:= -- 761
-add.period$ -- 18
+            5283 wiz_defined-function locations,
+            1389 strings with 19108 characters,
+and the built_in function-call counts, 17425 in all, are:
+= -- 2620
+> -- 589
+< -- 1
++ -- 183
+- -- 207
+* -- 1148
+:= -- 1769
+add.period$ -- 87
 call.type$ -- 17
-change.case$ -- 16
-chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 271
-empty$ -- 485
-format.name$ -- 59
-if$ -- 1320
-int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 18
-newline$ -- 55
-num.names$ -- 19
-pop$ -- 44
+change.case$ -- 124
+chr.to.int$ -- 17
+cite$ -- 24
+duplicate$ -- 1378
+empty$ -- 981
+format.name$ -- 246
+if$ -- 4454
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 69
+newline$ -- 201
+num.names$ -- 104
+pop$ -- 451
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 192
 quote$ -- 0
-skip$ -- 207
+skip$ -- 394
 stack$ -- 0
-substring$ -- 431
-swap$ -- 125
-text.length$ -- 0
+substring$ -- 1425
+swap$ -- 150
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 2
-while$ -- 64
-width$ -- 19
-write$ -- 175
-(There were 2 warnings)
+type$ -- 149
+warning$ -- 7
+while$ -- 124
+width$ -- 0
+write$ -- 311
+(There were 7 warnings)
