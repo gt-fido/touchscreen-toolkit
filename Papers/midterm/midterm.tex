@@ -1,0 +1,104 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\begin{document}
+    \title{Slider Interface for Animals\\}
+
+    \author{\IEEEauthorblockN{1\textsuperscript{st} Jacob Logas}
+    \IEEEauthorblockA{\textit{College of Computing} \\
+    \textit{Georgia Institute of Technology}\\
+    Atlanta, GA, United States \\
+    logasja@gatech.edu}
+    \and
+    \IEEEauthorblockN{2\textsuperscript{nd} Will Mitchell}
+    \IEEEauthorblockA{\textit{College of Computing} \\
+    \textit{Georgia Institute of Technology}\\
+    Atlanta, GA, United States \\
+    wmitchell30@gatech.edu}
+    \and
+    \IEEEauthorblockN{3\textsuperscript{rd} Monira Khan}
+    \IEEEauthorblockA{\textit{College of Computing} \\
+    \textit{Georgia Institute of Technology}\\
+    Atlanta, GA, United States \\
+    monirakhan@gatech.edu}
+    \and
+    \IEEEauthorblockN{4\textsuperscript{th} Lorita Freeman}
+    \IEEEauthorblockA{\textit{College of Computing} \\
+    \textit{Georgia Institute of Technology}\\
+    Atlanta, GA, United States \\
+    lorita.freeman@gatech.edu}
+    }
+    
+    \maketitle    
+
+    \begin{abstract}
+    Touchscreens have become ubiquitous in technology, allowing any number of interfaces to be created for the display. In the past, interfaces have been created for dogs however many have made liberal use of buttons and not other user interface interactions that are common in human interfaces. Here, we developed a framework on which interfaces can be built and tested with metrics such as touch position over time and time to complete. To demonstrate the framework’s efficacy, we build a simple slider interface that can be modified in a variety of ways. Our hope is this framework can be used to quantifiably evaluate interfaces created for animals.
+    \end{abstract}
+
+    \begin{IEEEkeywords}
+        component, formatting, style, styling, insert
+    \end{IEEEkeywords}
+
+
+    \section{Introduction}
+    The goal of this project is to create a platform on which interactions between dogs and touchscreen interfaces can be studied and expanded upon. Dogs are frequently able to take many complex tasks upon themselves in the service and assistance field, so it stands to reason that they would also be capable of learning electronic systems. Dogs could be trained to do things like dialing 911 if their owner was having a seizure, for example. While this is still very early, this research aims to create various kinds of testing interfaces that dogs can interact with.
+
+
+    \section{Previous Work}
+    \subsection{Animal Cognition}
+        Animal cognition research until recently believed dogs to be too changed by their domestication to have any interesting cognitive ability worthy of study. Recently though, the perception of dog cognition has significantly improved such that most animal cognitive studies make use of them. Obtaining subjects is relatively easy as much of the population have companion dogs and cognitive studies have low risk of injury. Additionally, all one needs to run a dog study is an empty room \cite{Morell2009}.
+        
+        Studies into domestic dog cognition has provided evidence of dogs’ ability to reason. Aust et al. investigates inferential reasoning in dogs by providing dogs a set of suboptimal stimuli known to the dog and one unknown stimuli. If the dog chooses the unknown stimuli, it gives evidence of reasoning by the dog that if the optimal stimuli is not among the known, it must be the unknown.This is accomplished through use of a touchscreen with icons which, in addition to giving evidence of inferential reasoning, is evidence of dogs’ ability to reason meaning behind icons in a digital interface \cite{Aust2008}.
+        
+        Range et al. added to this evident ability of dogs by studying dogs’ ability to categorize images based on content. The study uses a touchscreen on which dogs are shown images with either only landscapes or only dogs which are categorized by the subjects with high accuracy. To ensure no bias to the specific dog images, a photo editing tool is used to extract the dogs in the images and post them over the landscape images. This led to a decrease in accuracy however categorization was well above random chance \cite{Range2008}.
+        
+        Cognitive science may give an indication of dogs’ abilities to use existing technology, but one must consider not only if an animal can use an interface but also if the interface improves its livelihood. This is what led to the rise of Human-Computer Interaction (HCI) as a discipline within computer science and now the extension to Animal-Computer Interaction (ACI).
+
+    \subsection{Animal-Computer Interaction}
+        Technology has long been the new evolutionary force for humankind, allowing us to no longer need to adapt to our environment but create environments amicable to us. Companion animals have enjoyed some of the comforts afforded to us tangentially such as air conditioning, clean water, and complex medical procedures. However, much of user-centered technology has been solely developed for humans. One may argue that this is because animals lack the skill to make use of these tools, to which one can point to studies that find animals to make tools and even exploit human tools for their ends \cite{Hunt2004}.
+        
+        This is not to say there have been no technologies developed for use by animals, however they are often to enhance the human’s relationship with the animal. These include automatic milkers, GPS collar trackers, and interfaces used for behavioral experiments \cite{Epstein2000,Garton2001}. In addition, service animals have been trained to take on tasks that are difficult for their handlers to perform such as operating light switches or washing machines \cite{Mancini2017a}. Consumer devices ostensibly made for companion animals have also come to the market in the form of tracking collars or teleconferencing systems with the promise of improving the animal’s life.
+        
+        Though in all of these technologies, the animals have no interaction with the development process. Humans are making the devices in the way that best serves their needs with only some consideration given to the animal using it. Questions from HCI are therefore ignored when applied to animals. Instead of questioning how the interaction would influence the animal’s capabilities, activities, and experience we think in terms of how it will affect the livelihood of the owner with relation to the animal.
+        
+        This has changed with the rise of ACI where the concern of how the animal is experiencing the technology is considered. As many researchers from the field of HCI were the ones to pioneer this field, they brought their core considerations with them. User experience is of high importance in HCI and that has transferred over to ACI as was user-centered and participatory design \cite{Forlizzi2004,10.1007/978-3-642-15231-3_11,Muller1993}. Unfortunately, many of these considerations prove to be more difficult when there is no way to reliably obtain the participant’s experience objectively.
+        
+        In the face of fragmentation of the field, Mancini called for the development of ACI as a discipline with three core aims. First, studying and theorising animal interaction with technology in a naturalistic setting. Second, develop user-centered technology to improve welfare, support their activities, and foster interspecies relationship. Finally, allow animals to be stakeholders in the design of technology by focusing on them as the main user.
+        
+        One major obstacle in developing with animals as opposed to for animals is that humans are making the interfaces. Therefore, there is a disassociation between the proponents and intended beneficiaries. It is arguable that the interests of humans and other animals are not always aligned and often are in direct competition and that human interpretation of animal interests are significantly biased with the human’s experiences and world views. Some posit that animals’ are unable to communicate in a way that contributes to the design of an interface or that the inability to simply relate complex ideas and opinions results in a disparity of power between the designer and animals. Lawson et al. argues that this leads to technology that is explotative of animals \cite{Lawson:2015:PUT:2702123.2702260}.
+        
+        To overcome these obstacles, several frameworks have been proposed to conceptualise the animal interaction with technology and their involvement in the design process. Resner extended traditional design concepts to develop a remote dog training system \cite{Resner2001}. Paci et al. and Mancini et al. reviewed interaction design principles to improve animal biotelemetry wearability and accessibility of canine interfaces \cite{Paci2016, Mancini:2011:AIM:1978822.1978836}.
+
+    \subsection{Animal Interfaces}
+        A major focus of recent studies in ACI have been the use of computer devices for improving communication between working dogs and their handlers. We will briefly touch on some of the more relevant cases.
+        
+        Byrne et al. introduced an interface that is mounted on the dog’s harness which vibrates on either side. This study found that dogs are able to be taught to discriminate between the vibrations and react with some action when prompted by the motors. This study not only introduced a usable interface but also gave insight into some unexpected considerations that need to take place when developing and testing interfaces. This is especially true of dogs who are able to quickly learn triggers, even if subconsciously expressed \cite{Byrne2014}.
+        
+        Zeagler et al. presented another wearable device that is mounted on the dog’s harness. This device has a capacitive sensor on either side that the dog can touch with its nose for communication purposes. Through subsequent trials, it was found that the sensor could be accidentally activated by a dog’s ear or surrounding environment. This was an interesting finding as it gives more information to more considerations that need to be taken when working with dog physiology \cite{Zeagler2016a}.
+        
+        Most relevant to this work however, is the work done by Zeagler et al. on an emergency alert system that is operated by a service dog when at home. The authors identified several pitfalls when designing a digital interface for dogs. First, that a capacitive touchscreen after some use will become non-responsive because of accumulated slobber. To fix this, an infrared-based touchscreen is advised. Additionally, it was discovered that a constantly emitting display such as an LED monitor is preferable to say a projector which, because of its method of color emittance, caused the dogs to lose the button positions. Finally, the authors find that larger buttons are preferable as the dog is interacting with its nose and therefore does not have a full view of the screen \cite{Zeagler2014}.
+
+    \section{Your Work}
+        So far, we have prototyped out the beginning of a yellow slider in unity that responds to touch as an interface. This so far is only the beginning. We hope to provide a variety of different sliders that I will describe, and a couple of which are shown below.
+
+        In the preliminary research, the dogs were shown 3 different colored circles that each played different tones when pressed on the screen. We hope to provide the same level of variety here. As you can see on the prototyped drawings, we want to show different shapes/colors to see if they possibly changed the responses that the dogs showed. We also what to have sliders that would change the background color as they slid along the gradient to see if they affected behavior.
+
+        Lastly and most complex we have drafted some much more difficult ones. The idea behind these represent multi step tasks for the dogs. One of the sliders would have a dip in the middle, and another might be U or S shaped, to make the trail more difficult for the dog to follow. Another would be a slider that would rotate as it was moved, to make it harder to move in a straight line. This would be something similar to what would be required of using a website, for example.
+    
+    \section{Future Work}
+        Our future work from here on lies entirely in the implementation of the plans we set out in the previous section. Obviously a large part of this is going to be in the coding of these to work as actually described. We believe that we can at the very least get the multiple shape and color ones working correctly, using multiple different sounds. We are also in the process of trying to find dogs that we can test with to see if our prototypes perform as expected. This will probably require creating interfaces that work for outputting testing data as well instead of simply going for a proof of concept.
+    
+    \section{Conclusion}
+        Research based on dogs, technology, and touchscreens has been in the works for a long time. With this project, we wanted to expand on the current research by creating a variety of interfaces to see how dogs react and interact with them. Testing the dogs’ capabilities with different interfaces will show us what adjustments and improvements we can make to these interfaces. This opens up the possibilities of what dogs will be able to do with technology in the future. Service dogs, police dogs, and even our pets can already aid us in so many ways, and with the progression of this research our companions will be able to take on greater roles in our lives and in our society.
+
+    \bibliography{midterm}
+    \bibliographystyle{ieeetr}
+
+\end{document}

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: midterm.aux
+The style file: ieeetr.bst
+Database file #1: midterm.bib
+Warning--empty journal in Resner2001
+Warning--empty journal in Paci2016
+You've used 17 entries,
+            1876 wiz_defined-function locations,
+            605 strings with 6980 characters,
+and the built_in function-call counts, 5454 in all, are:
+= -- 557
+> -- 209
+< -- 0
++ -- 76
+- -- 59
+* -- 410
+:= -- 761
+add.period$ -- 18
+call.type$ -- 17
+change.case$ -- 16
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 271
+empty$ -- 485
+format.name$ -- 59
+if$ -- 1320
+int.to.chr$ -- 0
+int.to.str$ -- 17
+missing$ -- 18
+newline$ -- 55
+num.names$ -- 19
+pop$ -- 44
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 207
+stack$ -- 0
+substring$ -- 431
+swap$ -- 125
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 64
+width$ -- 19
+write$ -- 175
+(There were 2 warnings)
