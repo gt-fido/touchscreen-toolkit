@@ -16,7 +16,8 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void movePanelOut() {
-		panelTrans.offsetMin = new Vector2(-400, panelTrans.offsetMin.y);
-		panelTrans.offsetMax = new Vector2(-400, panelTrans.offsetMax.y);
+		panelTrans.offsetMin = new Vector2(-1000, panelTrans.offsetMin.y);
+		panelTrans.offsetMax = new Vector2(-1000, panelTrans.offsetMax.y);
 	}
+
 }
