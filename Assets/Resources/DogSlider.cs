@@ -18,4 +18,35 @@ public class DogSlider : Slider {
 
         // TODO: Intelligently change scale to keep in frame
    }
+
+   public void ScaleHandle(float scale) {
+        // If the absolute difference is less than 0.01 do nothing.
+        if(Mathf.Abs(this.handleRect.transform.localScale.x - scale) <= 0.01)
+            return;
+        
+        // Otherwise scale to new scale
+        this.handleRect.transform.localScale = new Vector3(scale, scale, 1.0f);
+   }
+
+   public void ScaleTrackXSize(float scale) {
+        // If the absolute difference is less than 0.01 do nothing.
+        if(Mathf.Abs(this.transform.localScale.x - scale) <= 0.01)
+            return;
+
+        // Otherwise scale to new scale
+        this.transform.localScale = new Vector3(scale, 
+                                                this.transform.localScale.y,
+                                                this.transform.localScale.z);
+   }
+
+    public void ScaleTrackYSize(float scale) {
+        // If the absolute difference is less than 0.01 do nothing.
+        if(Mathf.Abs(this.transform.localScale.y - scale) <= 0.01)
+            return;
+
+        // Otherwise scale to new scale
+        this.transform.localScale = new Vector3(this.transform.localScale.x, 
+                                                scale,
+                                                this.transform.localScale.z);
+   }
 }
