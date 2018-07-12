@@ -32,4 +32,11 @@ public class Menu : MonoBehaviour {
 		color_pkr.onEndEdit.Invoke(color_pkr.text);
 		Debug.Log(color_pkr.text);
 	}
+
+	public void changeColor(Color color){
+		// Debug.Log("Setting color to: " + color);
+		if(this.img != null) {
+			this.img.color = color;
+		}
+	}
 }
