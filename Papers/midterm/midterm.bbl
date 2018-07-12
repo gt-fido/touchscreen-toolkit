@@ -1,0 +1,233 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
+
+\bibitem{Aust2008}
+{Ulrike Aust}, {Friederike Range}, {Michael Steurer}, {and} {Ludwig Huber}.
+  2008.
+\newblock \showarticletitle{{Inferential reasoning by exclusion in pigeons,
+  dogs, and humans}}.
+\newblock {\em Animal Cognition\/} {11}, 4 (2008), 587--597.
+\newblock
+\showISBNx{14359448 (ISSN)}
+\showISSN{14359448}
+\showDOI{%
+\url{http://dx.doi.org/10.1007/s10071-008-0149-0}}
+
+
+\bibitem{Byrne2014}
+{Ceara Byrne}, {Ryan Kerwin}, {Jay Zuerndorfer}, {Scott Gilliland}, {Zehua
+  Guo}, {Melody Jackson}, {Thad~E Starner}, {and} {Georgia Tech}. 2014.
+\newblock \showarticletitle{{Two-Way Communication between Working Dogs and
+  Their Handlers}}.
+\newblock {\em IEEE Pervasive Computing\/} {13}, 2 (2014), 80--83.
+\newblock
+\showISSN{1536-1268}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/MPRV.2014.38}}
+
+
+\bibitem{Epstein2000}
+{Robert Epstein} {and} {Jessica Rogers}. 2000.
+\newblock \showarticletitle{{On books}}.
+\newblock {\em The Behavior Analyst\/} {23}, 1 (apr 2000), 117--129.
+\newblock
+\showISSN{0738-6729}
+\showDOI{%
+\url{http://dx.doi.org/10.1007/BF03392006}}
+
+
+\bibitem{Forlizzi2004}
+{Jodi Forlizzi} {and} {Katja Battarbee}. 2004.
+\newblock \showarticletitle{{Understanding experience in interactive systems}}.
+  In {\em Proceedings of the 2004 conference on Designing interactive systems
+  processes, practices, methods, and techniques - DIS '04}. ACM Press, New
+  York, New York, USA, 261.
+\newblock
+\showISBNx{1581137877}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/1013115.1013152}}
+
+
+\bibitem{Garton2001}
+{Edward~O. Garton}, {Michael~J. Wisdom}, {Frederick~A. Leban}, {and} {Bruce~K.
+  Johnson}. 2001.
+\newblock {\em {Radio Tracking and Animal Populations}}.
+\newblock Academic Press. 15--42 pages.
+\newblock
+\showISBNx{9780124977815}
+\showDOI{%
+\url{http://dx.doi.org/10.1016/B978-012497781-5/50003-7}}
+
+
+\bibitem{Hunt2004}
+{Gavin~R. Hunt} {and} {Russell~D. Gray}. 2004.
+\newblock \showarticletitle{{The crafting of hook tools by wild New Caledonian
+  crows}}.
+\newblock {\em Proceedings of the Royal Society B: Biological Sciences\/}
+  {271}, SUPPL. 3 (2004), 88--90.
+\newblock
+\showISBNx{0962-8452}
+\showISSN{14712970}
+\showDOI{%
+\url{http://dx.doi.org/10.1098/rsbl.2003.0085}}
+
+
+\bibitem{10.1007/978-3-642-15231-3_11}
+{Marta~Kristin Larusdottir}, {Emma~Run Bjarnadottir}, {and} {Jan Gulliksen}.
+  2010.
+\newblock \showarticletitle{{The Focus on Usability in Testing Practices in
+  Industry}}. In {\em Human-Computer Interaction}, {Peter Forbrig}, {Fabio
+  Patern{\'{o}}}, {and} {Annelise {Mark Pejtersen}} (Eds.). Springer Berlin
+  Heidelberg, Berlin, Heidelberg, 98--109.
+\newblock
+\showISBNx{1868-4238$\backslash$r978-3-64215-230-6}
+\showISSN{18684238}
+\showDOI{%
+\url{http://dx.doi.org/10.1007/978-3-642-15231-3_11}}
+
+
+\bibitem{Lawson:2015:PUT:2702123.2702260}
+{Shaun Lawson}, {Ben Kirman}, {Conor Linehan}, {Tom Feltwell}, {and} {Lisa
+  Hopkins}. 2015.
+\newblock \showarticletitle{{Problematising Upstream Technology Through
+  Speculative Design: The Case of Quantified Cats and Dogs}}. In {\em
+  Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing
+  Systems} {\em (CHI '15)}. ACM, New York, NY, USA, 2663--2672.
+\newblock
+\showISBNx{978-1-4503-3145-6}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2702123.2702260}}
+
+
+\bibitem{Mancini:2011:AIM:1978822.1978836}
+{Clara Mancini}. 2011.
+\newblock \showarticletitle{{Animal-computer Interaction: A Manifesto}}.
+\newblock {\em interactions\/} {18}, 4 (jul 2011), 69--73.
+\newblock
+\showISSN{1072-5520}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/1978822.1978836}}
+
+
+\bibitem{Mancini2017a}
+{Clara Mancini}. 2017.
+\newblock \showarticletitle{{Towards an animal-centred ethics for
+  Animal–Computer Interaction}}.
+\newblock {\em International Journal of Human Computer Studies\/}  {98} (feb
+  2017), 221--233.
+\newblock
+\showISBNx{9725233859}
+\showISSN{10959300}
+\showDOI{%
+\url{http://dx.doi.org/10.1016/j.ijhcs.2016.04.008}}
+
+
+\bibitem{Morell2009}
+{V. Morell}. 2009.
+\newblock \showarticletitle{{Going to the Dogs}}.
+\newblock {\em Science\/} {325}, 5944 (aug 2009), 1062--1065.
+\newblock
+\showISSN{0036-8075}
+\showDOI{%
+\url{http://dx.doi.org/10.1126/science.325_1062}}
+
+
+\bibitem{Muller1993}
+{MJ~Michael~J. Muller} {and} {Sarah Kuhn}. 1993.
+\newblock \showarticletitle{{Participatory design}}.
+\newblock {\it Commun. ACM} {36}, 6 (1993), 24--28.
+\newblock
+\showISBNx{0805809511}
+\showISSN{00010782}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/153571.255960}}
+
+
+\bibitem{Paci2016}
+{Patrizia Paci}, {Clara Mancini}, {and} {Blaine~A Price}. 2016.
+\newblock \showarticletitle{{Towards a wearer-centred framework for animal
+  biotelemetry}}.
+\newblock  May (2016), 25--27.
+\newblock
+
+
+\bibitem{Range2008}
+{Friederike Range}, {Ulrike Aust}, {Michael Steurer}, {and} {Ludwig Huber}.
+  2008.
+\newblock \showarticletitle{{Visual categorization of natural stimuli by
+  domestic dogs}}.
+\newblock {\em Animal Cognition\/} {11}, 2 (2008), 339--347.
+\newblock
+\showISBNx{1007100701232}
+\showISSN{14359448}
+\showDOI{%
+\url{http://dx.doi.org/10.1007/s10071-007-0123-2}}
+
+
+\bibitem{Resner2001}
+{Benjamin~Ishak Resner}. 2001.
+\newblock \showarticletitle{{Rover @ Home : Computer Mediated Remote
+  Interaction Between Humans and Dogs Rover @ Home : Computer Mediated Remote
+  Interaction Between Humans and Dogs}}.
+\newblock  (2001), 1--109.
+\newblock
+
+
+\bibitem{Zeagler2016a}
+{Clint Zeagler}, {Ceara Byrne}, {Giancarlo Valentin}, {Larry Freil}, {Eric
+  Kidder}, {James Crouch}, {Thad Starner}, {and} {Melody~Moore Jackson}. 2016.
+\newblock \showarticletitle{{Search and rescue: dog and handler collaboration
+  through wearable and mobile interfaces}}.
+\newblock {\em Proceedings of the Third International Conference on
+  Animal-Computer Interaction - ACI '16\/} (2016), 1--9.
+\newblock
+\showISBNx{9781450347587}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2995257.2995390}}
+
+
+\bibitem{Zeagler2014}
+{Clint Zeagler}, {Scott Gilliland}, {Larry Freil}, {Thad Starner}, {and}
+  {Melody Jackson}. 2014.
+\newblock \showarticletitle{{Going to the dogs: towards an interactive
+  touchscreen interface for working dogs}}.
+\newblock {\em Proceedings of the 27th annual ACM symposium on User interface
+  software and technology\/} (2014), 497--507.
+\newblock
+\showISBNx{9781450330695}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2642918.2647364}}
+
+
+\end{thebibliography}
