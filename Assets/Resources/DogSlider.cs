@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DogSlider : Slider {
     public void Update() {
 
+        // TODO: Based on handle position, set value
+        // TODO: Turn off physics if selected
+
     }
 
     public void RotateSlider(float degree) {
