@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DogSlider : Slider {
     public float handle_mass = 1.0f;
-    
+
     public void Update() {
         float rotation = this.transform.eulerAngles.z;
     }
