@@ -13,7 +13,7 @@
         "**/*.unityproj":true,
         "**/*.dll":true,
         "**/*.exe":true,
-        "**/*.pdf":true,
+        "**/*.pdf":false,
         "**/*.mid":true,
         "**/*.midi":true,
         "**/*.wav":true,
@@ -52,5 +52,8 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "latex-workshop.latex.toolchain": [
+        
+    ]
 }
