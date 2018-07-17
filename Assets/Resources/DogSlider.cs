@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DogSlider : Slider {
+    public float handle_mass = 1.0f;
+    
     public void Update() {
-
+        float rotation = this.transform.eulerAngles.z;
     }
 
     public void RotateSlider(float degree) {
@@ -28,25 +30,19 @@ public class DogSlider : Slider {
         this.handleRect.transform.localScale = new Vector3(scale, scale, 1.0f);
    }
 
-   public void ScaleTrackXSize(float scale) {
+   public void SetWidth(float width) {
         // If the absolute difference is less than 0.01 do nothing.
-        if(Mathf.Abs(this.transform.localScale.x - scale) <= 0.01)
-            return;
+        RectTransform rt = this.transform as RectTransform;
 
         // Otherwise scale to new scale
-        this.transform.localScale = new Vector3(scale, 
-                                                this.transform.localScale.y,
-                                                this.transform.localScale.z);
+        rt.sizeDelta = new Vector2(width, rt.sizeDelta.y);
    }
 
-    public void ScaleTrackYSize(float scale) {
+    public void SetHeight(float height) {
         // If the absolute difference is less than 0.01 do nothing.
-        if(Mathf.Abs(this.transform.localScale.y - scale) <= 0.01)
-            return;
+        RectTransform rt = this.transform as RectTransform;
 
         // Otherwise scale to new scale
-        this.transform.localScale = new Vector3(this.transform.localScale.x, 
-                                                scale,
-                                                this.transform.localScale.z);
+        rt.sizeDelta = new Vector2(rt.sizeDelta.x, height);
    }
 }
