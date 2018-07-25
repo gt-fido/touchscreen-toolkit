@@ -23,7 +23,17 @@ public class Dog_Slider_Custom : MonoBehaviour {
 	private GameObject lines;
 
 	void OnEnable(){
+		// Set dirty for redraw
 		curve.SetDirty();
+		// Draw curve
+		DrawCurve();
+	}
+
+	void OnDisable(){
+		GameObject.DestroyImmediate(lines);
+	}
+
+	private void DrawCurve() {
 		var points = curve.getPoints();
 
 		lines = new GameObject("Lines");
@@ -31,11 +41,11 @@ public class Dog_Slider_Custom : MonoBehaviour {
 
 		lines.AddComponent<LineRenderer>();
 		LineRenderer lr = lines.GetComponent<LineRenderer>();
-		lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-		lr.startColor = background;
-		lr.endColor = background;
+		lr.material = new Material(Shader.Find("Unlit/Color"));
+		lr.material.color = background;
 		lr.startWidth = width;
 		lr.endWidth = width;
+		lr.numCapVertices = 10;
 		lr.positionCount = 0;
 
 		if(points.Count > 1){
@@ -52,34 +62,4 @@ public class Dog_Slider_Custom : MonoBehaviour {
 			// if (curve.close) DrawCurveGamespace(lines.transform, points[points.Count - 1], points[0], curve.resolution, lr);
 		}
 	}
-
-	void OnDisable(){
-		GameObject.DestroyImmediate(lines);
-	}
-
-	// public static void DrawCurveGamespace(BezierPoint p1, BezierPoint p2, int resolution, LineRenderer lr)
-	// {
-	// 	int limit = lr.;
-	// 	float _res = resolution;
-	// 	Vector3 currentPoint = Vector3.zero;
-
-	// 	for(int i = lr.positionCount - resolution; i < limit; i++){
-	// 		currentPoint = BezierCurve.GetPoint(p1, p2, i/_res);
-	// 		lr.SetPosition(i, currentPoint);
-	// 	}
-	// }
-
-	// public static void DrawCurveGamespace(Transform lines, BezierPoint p1, BezierPoint p2, int resolution, Color color, float width)
-	// {
-	// 	int limit = resolution+1;
-	// 	float _res = resolution;
-	// 	Vector3 lastPoint = p1.position;
-	// 	Vector3 currentPoint = Vector3.zero;
-		
-	// 	for(int i = 1; i < limit; i++){
-	// 		currentPoint = BezierCurve.GetPoint(p1, p2, i/_res);
-	// 		BezierCurve.DrawLine(lastPoint, currentPoint, color, lines.transform, width);
-	// 		lastPoint = currentPoint;
-	// 	}
-	// }
 }
