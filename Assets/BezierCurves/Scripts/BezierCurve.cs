@@ -596,7 +596,7 @@ public class BezierCurve : MonoBehaviour {
 			return float.PositiveInfinity;
 	}
 
-	public static void DrawLine(Vector3 start, Vector3 end, Color color, Transform parent = null, float duration = 0.2f)
+	public static void DrawLine(Vector3 start, Vector3 end, Color color, Transform parent = null, float width = 0.2f)
 	{
 		GameObject myLine = new GameObject();
 		myLine.transform.parent = parent;
@@ -606,8 +606,8 @@ public class BezierCurve : MonoBehaviour {
 		lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
 		lr.startColor = color;
 		lr.endColor = color;
-		lr.startWidth = 0.1f;
-		lr.endWidth = 0.1f;
+		lr.startWidth = width;
+		lr.endWidth = width;
 		lr.SetPosition(0, start);
 		lr.SetPosition(1, end);
 	//  GameObject.Destroy(myLine, duration);
