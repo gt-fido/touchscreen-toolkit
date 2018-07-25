@@ -5,9 +5,19 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
 
+	public enum Elements {
+		Handle,
+		Background,
+		Fill,
+		Empty,
+		None
+	}
+
+	public Dog_Slider_Custom slider; 
+
 	RectTransform panelTrans;
 
-	Image img;
+	public Elements focusedElement = Elements.None;
 
     public Color c_start = Color.blue;
     public Color c_end = Color.yellow;
@@ -33,26 +43,41 @@ public class Menu : MonoBehaviour {
 		panelTrans.offsetMax = new Vector2(-1000, panelTrans.offsetMax.y);
 	}
 
-	public void focusOnElement(Image img){
-		this.img = img;
-		color_pkr.text = ColorUtility.ToHtmlStringRGB(img.color);
-		color_pkr.onEndEdit.Invoke(color_pkr.text);
-		Debug.Log(color_pkr.text);
+	private Color getElementColor(Elements el) {
+		if(el == Elements.Background)
+			return cam.backgroundColor;
+		else if(el == Elements.Handle)
+			return slider.handle;
+		else if(el == Elements.Empty)
+			return slider.background;
+		else if(el == Elements.Fill)
+			return slider.fill;
+		else
+			return Color.black;
 	}
 
-	public void focusOnCamera(){
-		this.img = null;
-		color_pkr.text = ColorUtility.ToHtmlStringRGB(cam.backgroundColor);
+	private void setElementColor(Elements el, Color color) {
+		if(el == Elements.Background)
+			cam.backgroundColor = color;
+		else if(el == Elements.Handle)
+			slider.handle = color;
+		else if(el == Elements.Empty)
+			slider.background = color;
+		else if(el == Elements.Fill)
+			slider.fill = color;
+	}
+
+	public void focusOnElement(string element){
+		Elements el = (Elements) System.Enum.Parse(typeof(Elements), element, true);
+		this.focusedElement = el;
+		color_pkr.text = ColorUtility.ToHtmlStringRGB(getElementColor(el));
 		color_pkr.onEndEdit.Invoke(color_pkr.text);
 		Debug.Log(color_pkr.text);
 	}
 
 	public void changeColor(Color color){
 		// Debug.Log("Setting color to: " + color);
-		if(this.img != null) {
-			this.img.color = color;
-		} else if(this.cam != null) {
-			this.cam.backgroundColor = color;
-		}
+		if(this.focusedElement != Elements.None)
+			setElementColor(this.focusedElement, color);
 	}
 }

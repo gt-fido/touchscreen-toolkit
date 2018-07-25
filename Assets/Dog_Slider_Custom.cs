@@ -7,26 +7,39 @@ public class Dog_Slider_Custom : MonoBehaviour {
 
 	// Reference to the curve instantiated further down the inheritance tree
 	public BezierCurve curve;
-	public Color background = Color.red;
+	public Color background;
+	public Color handle;
+	public Color fill;
 	public float width = 1.0f;
+	public float length = 1.0f;
+
+	private LineRenderer lr;
+
+	private GameObject lines;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		lines = GameObject.Find("Lines");
+		if(lines)
+			lr = lines.GetComponent<LineRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(lr.material.color != background)
+			lr.material.color = background;
+		if(lr.startWidth - width > 0.1f){
+			lr.startWidth = width;
+			lr.endWidth = width;
+		}
 	}
-
-	private GameObject lines;
 
 	void OnEnable(){
 		// Set dirty for redraw
 		curve.SetDirty();
 		// Draw curve
-		DrawCurve();
+		if(!lines)
+			DrawCurve();
 	}
 
 	void OnDisable(){
@@ -40,7 +53,7 @@ public class Dog_Slider_Custom : MonoBehaviour {
 		lines.transform.parent = this.transform;
 
 		lines.AddComponent<LineRenderer>();
-		LineRenderer lr = lines.GetComponent<LineRenderer>();
+		lr = lines.GetComponent<LineRenderer>();
 		lr.material = new Material(Shader.Find("Unlit/Color"));
 		lr.material.color = background;
 		lr.startWidth = width;
