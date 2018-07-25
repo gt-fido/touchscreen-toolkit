@@ -122,6 +122,10 @@ public class BezierCurve : MonoBehaviour {
 	/// </summary>
 	[SerializeField] private BezierPoint[] points = new BezierPoint[0];
 	
+	public System.Collections.ObjectModel.ReadOnlyCollection<BezierPoint> getPoints(){
+		return Array.AsReadOnly<BezierPoint>(points);
+	}
+
 	#endregion
 	
 	#region UnityFunctions
@@ -138,9 +142,9 @@ public class BezierCurve : MonoBehaviour {
 		}
 	}
 	
-	void Awake(){
-		dirty = true;
-	}
+	// void Awake(){
+	// 	dirty = true;
+	// }
 
 	#endregion
 	
@@ -510,6 +514,107 @@ public class BezierCurve : MonoBehaviour {
 	
 	#endregion
 	
+	#region FIDO_Functions
+
+	private Dictionary<Vector3, float> percentage_map;
+	private int closest;
+
+	public float percent = 0f;
+
+
+	/// <summary>
+	///		- Fills dictionary with calculated percentages for each point on curve
+	/// </summary>
+	/// <returns>
+	///		- Boolean indicating success.
+	/// </returns>
+	protected bool InitializePercentageMap() {
+		percentage_map.Add(points[0].position, 0);
+		percentage_map.Add(points[points.Length - 1].position, 1);
+
+		float totalPercent = 0;
+		float curvePercent = 0;
+
+		for (int i = 0; i < points.Length - 1; i++)
+		{
+			curvePercent = ApproximateLength(points[i], points[i+1], 10) / length;
+			totalPercent += curvePercent;
+			percentage_map.Add(points[i+1].position, totalPercent);
+		}
+
+		return true;
+	}
+
+	/// <summary>
+	/// 	- Updates the publically available percent variable
+	/// </summary>
+	/// <returns>
+	/// 	- Returns 't' percent along the curve as a float between 0 and 1
+	/// </returns>
+	/// <param name='t'>
+	/// 	- Vector indicating what point needs to have percentage along curve identified
+	/// </param>
+	public float UpdatePercentage(Vector3 p)
+	{
+		// TODO: Make sure when curve moved, this is reset
+		// If the map not already initilized, do so
+		if(percentage_map.Count == 0 || this.dirty)
+		{
+			percentage_map = new Dictionary<Vector3, float>();
+			InitializePercentageMap();
+		}
+
+		// Find minimum distance
+		float min_dist = float.PositiveInfinity;
+		BezierPoint min_point = null;
+		if(this.closest == 0) {
+			for(int i = 0; i < points.Length; i++){
+				var dist = Vector3.Distance(p, points[i].position);
+				if(dist < min_dist){
+					min_point = points[i];
+					min_dist = dist;
+					closest = i;
+				}
+			}
+		// Find the minimum distance surrounding the previous minimum
+		} else {
+			int start = this.closest - resolution < 0 ? 0 : this.closest - resolution;
+			int end = this.closest + resolution >= points.Length ? points.Length-1 : this.closest + resolution;
+			for(int i = start; i <= end; i++){
+				var dist = Vector3.Distance(p, points[i].position);
+				if(dist < min_dist) {
+					min_point = points[i];
+					min_dist = dist;
+					closest = i;
+				}
+			}
+		}
+
+		if(percentage_map.TryGetValue(min_point.position, out percent))
+			return percent;
+		else
+			return float.PositiveInfinity;
+	}
+
+	public static void DrawLine(Vector3 start, Vector3 end, Color color, Transform parent = null, float duration = 0.2f)
+	{
+		GameObject myLine = new GameObject();
+		myLine.transform.parent = parent;
+		myLine.transform.position = start;
+		myLine.AddComponent<LineRenderer>();
+		LineRenderer lr = myLine.GetComponent<LineRenderer>();
+		lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
+		lr.startColor = color;
+		lr.endColor = color;
+		lr.startWidth = 0.1f;
+		lr.endWidth = 0.1f;
+		lr.SetPosition(0, start);
+		lr.SetPosition(1, end);
+	//  GameObject.Destroy(myLine, duration);
+	}	
+
+	#endregion
+
 	/* needs testing
 	public Vector3 GetPointAtDistance(float distance)
 	{
