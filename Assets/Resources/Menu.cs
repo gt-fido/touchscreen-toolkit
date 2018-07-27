@@ -47,11 +47,11 @@ public class Menu : MonoBehaviour {
 		if(el == Elements.Background)
 			return cam.backgroundColor;
 		else if(el == Elements.Handle)
-			return slider.handle;
+			return slider.getColor(Dog_Slider_Custom.Parts.Handle);
 		else if(el == Elements.Empty)
-			return slider.background;
+			return slider.getColor(Dog_Slider_Custom.Parts.Slider);
 		else if(el == Elements.Fill)
-			return slider.fill;
+			return slider.getColor(Dog_Slider_Custom.Parts.Progress);
 		else
 			return Color.black;
 	}
@@ -60,11 +60,11 @@ public class Menu : MonoBehaviour {
 		if(el == Elements.Background)
 			cam.backgroundColor = color;
 		else if(el == Elements.Handle)
-			slider.handle = color;
+			slider.setColor(Dog_Slider_Custom.Parts.Handle, color);
 		else if(el == Elements.Empty)
-			slider.background = color;
+			slider.setColor(Dog_Slider_Custom.Parts.Slider, color);
 		else if(el == Elements.Fill)
-			slider.fill = color;
+			slider.setColor(Dog_Slider_Custom.Parts.Progress, color);
 	}
 
 	public void focusOnElement(string element){
