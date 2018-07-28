@@ -111,7 +111,7 @@ public class Handle : MonoBehaviour {
 		_points = Enumerable.Range(0, resolution)
 			.Select(i => {
 				var theta = 2 * Mathf.PI * i / resolution;
-				return new Vector3(radius * Mathf.Cos(theta), radius * Mathf.Sin(theta), 90f);
+				return new Vector3(radius * Mathf.Cos(theta), radius * Mathf.Sin(theta), 0f);
 			})
 			.ToArray();
 

@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour {
 		None
 	}
 
-	public Dog_Slider_Custom slider; 
+	public DogSlider slider; 
 
 	RectTransform panelTrans;
 
@@ -47,11 +47,11 @@ public class Menu : MonoBehaviour {
 		if(el == Elements.Background)
 			return cam.backgroundColor;
 		else if(el == Elements.Handle)
-			return slider.getColor(Dog_Slider_Custom.Parts.Handle);
+			return slider.getColor(DogSlider.Parts.Handle);
 		else if(el == Elements.Empty)
-			return slider.getColor(Dog_Slider_Custom.Parts.Slider);
+			return slider.getColor(DogSlider.Parts.Slider);
 		else if(el == Elements.Fill)
-			return slider.getColor(Dog_Slider_Custom.Parts.Progress);
+			return slider.getColor(DogSlider.Parts.Progress);
 		else
 			return Color.black;
 	}
@@ -60,11 +60,11 @@ public class Menu : MonoBehaviour {
 		if(el == Elements.Background)
 			cam.backgroundColor = color;
 		else if(el == Elements.Handle)
-			slider.setColor(Dog_Slider_Custom.Parts.Handle, color);
+			slider.setColor(DogSlider.Parts.Handle, color);
 		else if(el == Elements.Empty)
-			slider.setColor(Dog_Slider_Custom.Parts.Slider, color);
+			slider.setColor(DogSlider.Parts.Slider, color);
 		else if(el == Elements.Fill)
-			slider.setColor(Dog_Slider_Custom.Parts.Progress, color);
+			slider.setColor(DogSlider.Parts.Progress, color);
 	}
 
 	public void focusOnElement(string element){

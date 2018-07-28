@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Dog_Slider_Custom : MonoBehaviour {
+public class DogSlider : MonoBehaviour {
 
 	public enum Parts {
 		Slider,
@@ -128,6 +128,13 @@ public class Dog_Slider_Custom : MonoBehaviour {
 		OnEnable();
 
         // TODO: Intelligently change scale to keep in frame
+   }
+
+   public void SetHandleRadius(float radius) {
+		if(Mathf.Abs(this.handleRadius - radius) <= 0.1f)
+			return;
+
+		handleRadius = radius;
    }
 
    public void SetWidth(float width) {
