@@ -54,9 +54,9 @@ public class DogSlider : MonoBehaviour {
 		_lines = GameObject.Find("Lines");
 		if(_lines)
 			lr_track = _lines.GetComponent<LineRenderer>();
-		_handle = gameObject.GetComponentInChildren<Handle>();			
+		_handle = gameObject.GetComponentInChildren<Handle>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(lr_track.material.color != sliderBackground)
@@ -121,7 +121,7 @@ public class DogSlider : MonoBehaviour {
         // If the absolute difference is less than 0.1 do nothing.
         if(Mathf.Abs(this.transform.eulerAngles.z - degree) <= 0.1f)
             return;
-        
+
         // Otherwise rotate to the new degree
         this.transform.localEulerAngles = new Vector3(0.0f,0.0f,degree);
 		OnDisable();
@@ -151,7 +151,7 @@ public class DogSlider : MonoBehaviour {
 		Debug.Log(trans.name);
 		if(Mathf.Abs(trans.localScale.x - scale) <= 0.1f)
 			return;
-		
+
 		trans.localScale = new Vector3(scale, _curve.transform.localScale.y, _curve.transform.localScale.z);
 		OnDisable();
 		OnEnable();
@@ -162,7 +162,7 @@ public class DogSlider : MonoBehaviour {
 		Debug.Log(trans.name);
 		if(Mathf.Abs(trans.localScale.y - scale) <= 0.1f)
 			return;
-		
+
 		trans.localScale = new Vector3(_curve.transform.localScale.x, scale, _curve.transform.localScale.z);
 		OnDisable();
 		OnEnable();
@@ -214,8 +214,24 @@ public class DogSlider : MonoBehaviour {
 			}
 			lr_track.positionCount = curv_pnts.Count;
 			lr_track.SetPositions(curv_pnts.ToArray());
-			
+
 			// if (curve.close) DrawCurveGamespace(lines.transform, points[points.Count - 1], points[0], curve.resolution, lr);
 		}
+	}
+
+	private void PercentageColorChange(Parts slider=Parts.Slider, float percent) {
+	    // Necessary for the rgb multiplier
+	    if(percent < 50.0) {
+	        float red   = 0;
+	        float green = 0 + (percent * 2);
+	        float blue  = 100 - (percent * 2);
+	    }
+        else {
+	        float red   = (percent - 50) * 2;
+	        float green = 100;
+	        float blue  = 0;
+        }
+        Color color = new Color(red, green, blue, 1.0F)
+        setColor(slider, color)
 	}
 }

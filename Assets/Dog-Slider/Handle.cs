@@ -13,6 +13,7 @@ public class Handle : MonoBehaviour {
 	public int resolution {get; private set;}
 	public bool fill {get; private set;}
 	public float radius {get; private set;}
+
 	public Color fill_color {
 		get{
 			return mr.material.color;
@@ -135,7 +136,7 @@ public class Handle : MonoBehaviour {
 				return new Vector2(_points[i].x, _points[i].y);
 			})
 			.ToArray();
-		
+
 		// Triangulate shape
 		var triangles = new Triangulator(vec2_points).Triangulate();
 
