@@ -4,55 +4,55 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class HandleController : MonoBehaviour
-     , IPointerClickHandler // 2
-     , IDragHandler
-     , IPointerEnterHandler
-     , IPointerExitHandler {
+     , IPointerDownHandler // 2
+     , IPointerUpHandler
+     , IDragHandler{
 
 	private Handle _handle;
+    private BezierCurve _bezier;
     private float yOffset;
     private float xOffset;
+    [SerializeField]
+    private float startingPercent = 0f;
+    private Vector3 velocity;
 
 	// Use this for initialization
 	void Awake () {
 		_handle = gameObject.GetComponent<Handle>();
+        _bezier = transform.parent.gameObject.GetComponentInChildren<BezierCurve>();
 	}
 
     void Start () {
-        // TODO: Find screen size and calculate necessary offset
+        // Find screen size and calculate necessary offset
         Canvas cnvs = GameObject.FindObjectOfType<Canvas>();
         var rect = (cnvs.transform as RectTransform).rect;
         yOffset = -1 * rect.height / 2f;
         xOffset = -1 * rect.width / 2f;
 
+        // TODO: Have handle start at beginning of slider
+        _handle.transform.position = _bezier.GetPointAt(startingPercent);
     }
 
     void Update(){
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        // TODO: Check if inside handle and everything
-        Debug.Log(transform.position);
+        _handle.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
+
+
 
     public void OnDrag(PointerEventData eventData)
     {
         this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
-        // this.transform.position += new Vector3(eventData.delta.x, eventData.delta.y, 0f);
-        Vector3 velocity = eventData.delta * transform.localScale;
+        // this.transform.position += new Vector3(eventData.delta.x / (transform.localScale.x * 3), eventData.delta.y / (transform.localScale.y * 3), 0f);
+        velocity = eventData.delta * transform.localScale;
+        // _handle.GetComponent<Rigidbody2D>().velocity = velocity;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
         _handle.GetComponent<Rigidbody2D>().velocity = velocity;
-        // Debug.Log("Velocity: " + velocity.ToString() + ".");
-        // Debug.Log("Dragged Handle");
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Entered Handle");
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-  		Debug.Log("Exited Handle");
     }
 }
