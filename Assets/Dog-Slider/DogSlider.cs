@@ -23,6 +23,8 @@ public class DogSlider : MonoBehaviour {
 	private float sliderWidth = 1.0f;
 	[SerializeField]
 	private float sliderLength = 1.0f;
+	[SerializeField]
+	private float sliderColliderWidth = 1.0f;
 
 	[Header("Handle Properties")]
 	[SerializeField]
@@ -182,6 +184,8 @@ public class DogSlider : MonoBehaviour {
 		// Draw curve
 		if(!_lines)
 			DrawCurve();
+
+		_lines.transform.localPosition = Vector3.zero;
 	}
 
 	void OnDisable(){
@@ -195,28 +199,44 @@ public class DogSlider : MonoBehaviour {
 		_lines = new GameObject("Lines");
 		_lines.transform.parent = this.transform;
 
-		_lines.AddComponent<LineRenderer>();
-		lr_track = _lines.GetComponent<LineRenderer>();
+		lr_track = _lines.AddComponent<LineRenderer>();
 		lr_track.material = new Material(Shader.Find("Unlit/Color"));
 		lr_track.material.color = sliderBackground;
-		lr_track.startWidth = sliderWidth;
-		lr_track.endWidth = sliderWidth;
+		lr_track.widthMultiplier = sliderWidth;
 		lr_track.numCapVertices = 10;
-		lr_track.positionCount = 0;
+
+		var lines_collider = _lines.AddComponent<EdgeCollider2D>();
+		lines_collider.edgeRadius = 1f;
+
 
 		if(points.Count > 1){
-			List<Vector3> curv_pnts = new List<Vector3>();
+			Vector3[] curv_pnts = new Vector3[(sliderResolution * (points.Count - 1)) + 1];
 			for(int i = 0; i < points.Count - 1; i++){
 				for(int j = 0; j <= _curve.resolution; j++) {
-					float percent =  (float)j/_curve.resolution;
-					curv_pnts.Add(BezierCurve.GetPoint(points[i], points[i+1], percent));
+					curv_pnts[i * sliderResolution + j] = BezierCurve.GetPoint(points[i], points[i+1], (float)j/_curve.resolution);
 				}
 			}
-			lr_track.positionCount = curv_pnts.Count;
-			lr_track.SetPositions(curv_pnts.ToArray());
+
+			lr_track.positionCount = curv_pnts.Length;
+			lr_track.SetPositions(curv_pnts);
+
+			lines_collider.points = GetPointsSurrounding(curv_pnts);
 
 			// if (curve.close) DrawCurveGamespace(lines.transform, points[points.Count - 1], points[0], curve.resolution, lr);
 		}
+	}
+
+	private Vector2[] GetPointsSurrounding(Vector3[] points) {
+		Vector2[] sur_pnts = new Vector2[points.Length * 2];
+		float fullWidth = sliderColliderWidth + sliderWidth;
+		for(int i = 1; i < points.Length; i++) {
+			Vector2 dir = points[i] - points[i-1];
+			Vector2 pos_nine = dir.normalized.Rotate(90);
+			Vector2 neg_nine = dir.normalized.Rotate(-90);
+			sur_pnts[i] = pos_nine * fullWidth + (Vector2)points[i];
+			sur_pnts[i + points.Length] = neg_nine * fullWidth + (Vector2)points[i];
+		}
+		return sur_pnts;
 	}
 
 	private void PercentageColorChange(float percent, Parts slider=Parts.Slider) {
@@ -236,3 +256,18 @@ public class DogSlider : MonoBehaviour {
         setColor(slider, color);
 	}
 }
+
+
+ public static class Vector2Extension {
+     
+     public static Vector2 Rotate(this Vector2 v, float degrees) {
+         float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+         float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+         
+         float tx = v.x;
+         float ty = v.y;
+         v.x = (cos * tx) - (sin * ty);
+         v.y = (sin * tx) + (cos * ty);
+         return v;
+     }
+ }

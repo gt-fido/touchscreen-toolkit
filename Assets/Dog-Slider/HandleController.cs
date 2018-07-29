@@ -46,9 +46,7 @@ public class HandleController : MonoBehaviour
     public void OnDrag(PointerEventData eventData)
     {
         this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
-        // this.transform.position += new Vector3(eventData.delta.x / (transform.localScale.x * 3), eventData.delta.y / (transform.localScale.y * 3), 0f);
         velocity = eventData.delta * transform.localScale;
-        // _handle.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     public void OnPointerUp(PointerEventData eventData)
