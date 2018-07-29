@@ -52,12 +52,17 @@ public class DogSlider : MonoBehaviour {
 	private GameObject _lines;
 
 
-	public float[] sampled_point_line_dist {get; private set;}
 	public Vector3[] sampled_line_points {
 		get{
 			Vector3[] ret = new Vector3[lr_track.positionCount];
 			lr_track.GetPositions(ret);
 			return ret;
+		}
+	}
+
+	public float curveLength {
+		get{
+			return _curve.length;
 		}
 	}
 
@@ -69,6 +74,8 @@ public class DogSlider : MonoBehaviour {
 			lr_track = _lines.GetComponent<LineRenderer>();
 		_handle = gameObject.GetComponentInChildren<Handle>();
 		_handle_control = gameObject.GetComponentInChildren<HandleController>();
+		OnDisable();
+		OnEnable();
 	}
 
 	// Update is called once per frame
@@ -228,15 +235,15 @@ public class DogSlider : MonoBehaviour {
 
 		if(points.Count > 1){
 			Vector3[] curv_pnts = new Vector3[(sliderResolution * (points.Count - 1)) + 1];
-			sampled_point_line_dist = new float[(sliderResolution * (points.Count - 1)) + 1];
+			float [] line_dist = new float[(sliderResolution * (points.Count - 1)) + 1];
 			for(int i = 0; i < points.Count - 1; i++){
 				for(int j = 0; j <= _curve.resolution; j++) {
 					int idx = i * sliderResolution + j;
 					curv_pnts[idx] = BezierCurve.GetPoint(points[i], points[i+1], (float)j/_curve.resolution);
 					if(idx > 0) {
-						sampled_point_line_dist[idx] = Mathf.Abs(Vector3.Distance(curv_pnts[idx], curv_pnts[idx - 1])) + sampled_point_line_dist[idx-1];
+						line_dist[idx] = Mathf.Abs(Vector3.Distance(curv_pnts[idx], curv_pnts[idx - 1])) + line_dist[idx-1];
 					} else {
-						sampled_point_line_dist[idx] = 0f;
+						line_dist[idx] = 0f;
 					}
 				}
 			}
@@ -245,7 +252,9 @@ public class DogSlider : MonoBehaviour {
 			lr_track.SetPositions(curv_pnts);
 
 			lines_collider.points = GetPointsSurrounding(curv_pnts);
-			Debug.Log(_curve.length);
+
+			_handle_control.SetPositionLength(line_dist);
+			// Debug.Log(_curve.length);
 			// if (curve.close) DrawCurveGamespace(lines.transform, points[points.Count - 1], points[0], curve.resolution, lr);
 		}
 	}
