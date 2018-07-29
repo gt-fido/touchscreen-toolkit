@@ -15,16 +15,16 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 [Serializable]
 public class BezierCurve : MonoBehaviour {
-	
+
 	#region PublicVariables
-	
+
 	/// <summary>
 	///  	- the number of mid-points calculated for each pair of bezier points
 	///  	- used for drawing the curve in the editor
 	///  	- used for calculating the "length" variable
 	/// </summary>
 	public int resolution = 30;
-	
+
 	/// <summary>
 	/// Gets or sets a value indicating whether this <see cref="BezierCurve"/> is dirty.
 	/// </summary>
@@ -32,17 +32,17 @@ public class BezierCurve : MonoBehaviour {
 	/// <c>true</c> if dirty; otherwise, <c>false</c>.
 	/// </value>
 	public bool dirty { get; private set; }
-	
+
 	/// <summary>
 	/// 	- color this curve will be drawn with in the editor
 	///		- set in the editor
 	/// </summary>
 	public Color drawColor = Color.white;
-	
+
 	#endregion
-	
+
 	#region PublicProperties
-	
+
 	/// <summary>
 	///		- set in the editor
 	/// 	- used to determine if the curve should be drawn as "closed" in the editor
@@ -60,7 +60,7 @@ public class BezierCurve : MonoBehaviour {
 			dirty = true;
 		}
 	}
-	
+
 	/// <summary>
 	///		- set internally
 	///		- gets point corresponding to "index" in "points" array
@@ -73,7 +73,7 @@ public class BezierCurve : MonoBehaviour {
 	{
 		get { return points[index]; }
 	}
-	
+
 	/// <summary>
 	/// 	- number of points stored in 'points' variable
 	///		- set internally
@@ -86,7 +86,7 @@ public class BezierCurve : MonoBehaviour {
 	{
 		get { return points.Length; }
 	}
-	
+
 	/// <summary>
 	/// 	- The approximate length of the curve
 	/// 	- recalculates if the curve is "dirty"
@@ -102,48 +102,52 @@ public class BezierCurve : MonoBehaviour {
 				for(int i = 0; i < points.Length - 1; i++){
 					_length += ApproximateLength(points[i], points[i + 1], resolution);
 				}
-				
+
 				if(close) _length += ApproximateLength(points[points.Length - 1], points[0], resolution);
-				
+
 				dirty = false;
 			}
-			
+
 			return _length;
 		}
 	}
-	
+
 	#endregion
-	
+
 	#region PrivateVariables
-	
-	/// <summary> 
+
+	/// <summary>
 	/// 	- Array of point objects that make up this curve
 	///		- Populated through editor
 	/// </summary>
 	[SerializeField] private BezierPoint[] points = new BezierPoint[0];
-	
+
+	public System.Collections.ObjectModel.ReadOnlyCollection<BezierPoint> getPoints(){
+		return Array.AsReadOnly<BezierPoint>(points);
+	}
+
 	#endregion
-	
+
 	#region UnityFunctions
-	
+
 	void OnDrawGizmos () {
 		Gizmos.color = drawColor;
-		
+
 		if(points.Length > 1){
 			for(int i = 0; i < points.Length - 1; i++){
 				DrawCurve(points[i], points[i+1], resolution);
 			}
-			
+
 			if (close) DrawCurve(points[points.Length - 1], points[0], resolution);
 		}
 	}
-	
-	void Awake(){
-		dirty = true;
-	}
+
+	// void Awake(){
+	// 	dirty = true;
+	// }
 
 	#endregion
-	
+
 	#region PublicFunctions
 
 	/// <summary>
@@ -159,7 +163,7 @@ public class BezierCurve : MonoBehaviour {
 		points = tempArray.ToArray();
 		dirty = true;
 	}
-	
+
 	/// <summary>
 	/// 	- Adds a point at position
 	/// </summary>
@@ -175,13 +179,13 @@ public class BezierCurve : MonoBehaviour {
 
 		pointObject.transform.parent = transform;
 		pointObject.transform.position = position;
-		
+
 		BezierPoint newPoint = pointObject.AddComponent<BezierPoint>();
 		newPoint.curve = this;
-		
+
 		return newPoint;
 	}
-	
+
 	/// <summary>
 	/// 	- Removes the given point from the curve ("points" array)
 	/// </summary>
@@ -195,7 +199,7 @@ public class BezierCurve : MonoBehaviour {
 		points = tempArray.ToArray();
 		dirty = false;
 	}
-	
+
 	/// <summary>
 	/// 	- Gets a copy of the bezier point array used to define this curve
 	/// </summary>
@@ -206,7 +210,7 @@ public class BezierCurve : MonoBehaviour {
 	{
 		return (BezierPoint[])points.Clone();
 	}
-	
+
 	/// <summary>
 	/// 	- Gets the point at 't' percent along this curve
 	/// </summary>
@@ -220,13 +224,13 @@ public class BezierCurve : MonoBehaviour {
 	{
 		if(t <= 0) return points[0].position;
 		else if (t >= 1) return points[points.Length - 1].position;
-		
+
 		float totalPercent = 0;
 		float curvePercent = 0;
-		
+
 		BezierPoint p1 = null;
 		BezierPoint p2 = null;
-		
+
 		for(int i = 0; i < points.Length - 1; i++)
 		{
 			curvePercent = ApproximateLength(points[i], points[i + 1], 10) / length;
@@ -236,21 +240,21 @@ public class BezierCurve : MonoBehaviour {
 				p2 = points[i + 1];
 				break;
 			}
-			
+
 			else totalPercent += curvePercent;
 		}
-		
+
 		if(close && p1 == null)
 		{
 			p1 = points[points.Length - 1];
 			p2 = points[0];
 		}
-		
+
 		t -= totalPercent;
-		
+
 		return GetPoint(p1, p2, t / curvePercent);
 	}
-	
+
 	/// <summary>
 	/// 	- Get the index of the given point in this curve
 	/// </summary>
@@ -271,10 +275,10 @@ public class BezierCurve : MonoBehaviour {
 				break;
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	/// <summary>
 	/// 	- Sets this curve to 'dirty'
 	/// 	- Forces the curve to recalculate its length
@@ -283,11 +287,11 @@ public class BezierCurve : MonoBehaviour {
 	{
 		dirty = true;
 	}
-	
+
 	#endregion
-	
+
 	#region PublicStaticFunctions
-	
+
 	/// <summary>
 	/// 	- Draws the curve in the Editor
 	/// </summary>
@@ -306,13 +310,13 @@ public class BezierCurve : MonoBehaviour {
 		float _res = resolution;
 		Vector3 lastPoint = p1.position;
 		Vector3 currentPoint = Vector3.zero;
-		
+
 		for(int i = 1; i < limit; i++){
 			currentPoint = GetPoint(p1, p2, i/_res);
 			Gizmos.DrawLine(lastPoint, currentPoint);
 			lastPoint = currentPoint;
-		}		
-	}	
+		}
+	}
 
 	/// <summary>
 	/// 	- Gets the point 't' percent along a curve
@@ -337,12 +341,12 @@ public class BezierCurve : MonoBehaviour {
 			if(p2.handle1 != Vector3.zero) return GetCubicCurvePoint(p1.position, p1.globalHandle2, p2.globalHandle1, p2.position, t);
 			else return GetQuadraticCurvePoint(p1.position, p1.globalHandle2, p2.position, t);
 		}
-		
+
 		else
 		{
 			if(p2.handle1 != Vector3.zero) return GetQuadraticCurvePoint(p1.position, p2.globalHandle1, p2.position, t);
 			else return GetLinearPoint(p1.position, p2.position, t);
-		}	
+		}
 	}
 
 	/// <summary>
@@ -377,7 +381,7 @@ public class BezierCurve : MonoBehaviour {
 
         return part1 + part2 + part3 + part4;
     }
-	
+
 	/// <summary>
 	/// 	- Gets the point 't' percent along a second-order curve
 	/// </summary>
@@ -406,7 +410,7 @@ public class BezierCurve : MonoBehaviour {
 
         return part1 + part2 + part3;
     }
-	
+
 	/// <summary>
 	/// 	- Gets point 't' percent along a linear "curve" (line)
 	/// 	- This is exactly equivalent to Vector3.Lerp
@@ -427,7 +431,7 @@ public class BezierCurve : MonoBehaviour {
     {
         return p1 + ((p2 - p1) * t);
     }
-	
+
 	/// <summary>
 	/// 	- Gets point 't' percent along n-order curve
 	/// </summary>
@@ -442,19 +446,19 @@ public class BezierCurve : MonoBehaviour {
 	/// </param>
 	public static Vector3 GetPoint(float t, params Vector3[] points){
 		t = Mathf.Clamp01(t);
-		
+
 		int order = points.Length-1;
 		Vector3 point = Vector3.zero;
 		Vector3 vectorToAdd;
-		
+
 		for(int i = 0; i < points.Length; i++){
 			vectorToAdd = points[points.Length-i-1] * (BinomialCoefficient(i, order) * Mathf.Pow(t, order-i) * Mathf.Pow((1-t), i));
 			point += vectorToAdd;
 		}
-		
+
 		return point;
 	}
-	
+
 	/// <summary>
 	/// 	- Approximates the length
 	/// </summary>
@@ -476,40 +480,40 @@ public class BezierCurve : MonoBehaviour {
 		float total = 0;
 		Vector3 lastPosition = p1.position;
 		Vector3 currentPosition;
-		
+
 		for(int i = 0; i < resolution + 1; i++)
 		{
 			currentPosition = GetPoint(p1, p2, i / _res);
 			total += (currentPosition - lastPosition).magnitude;
 			lastPosition = currentPosition;
 		}
-		
+
 		return total;
 	}
-	
+
 	#endregion
-	
+
 	#region UtilityFunctions
-	
+
 	private static int BinomialCoefficient(int i, int n){
 		return 	Factoral(n)/(Factoral(i)*Factoral(n-i));
 	}
-	
+
 	private static int Factoral(int i){
 		if(i == 0) return 1;
-		
+
 		int total = 1;
-		
+
 		while(i-1 >= 0){
 			total *= i;
 			i--;
 		}
-		
+
 		return total;
 	}
-	
+
 	#endregion
-	
+
 	/* needs testing
 	public Vector3 GetPointAtDistance(float distance)
 	{
@@ -518,19 +522,19 @@ public class BezierCurve : MonoBehaviour {
 			if(distance < 0) while(distance < 0) { distance += length; }
 			else if(distance > length) while(distance > length) { distance -= length; }
 		}
-		
+
 		else
 		{
 			if(distance <= 0) return points[0].position;
 			else if(distance >= length) return points[points.Length - 1].position;
 		}
-		
+
 		float totalLength = 0;
 		float curveLength = 0;
-		
+
 		BezierPoint firstPoint = null;
 		BezierPoint secondPoint = null;
-		
+
 		for(int i = 0; i < points.Length - 1; i++)
 		{
 			curveLength = ApproximateLength(points[i], points[i + 1], resolution);
@@ -542,14 +546,14 @@ public class BezierCurve : MonoBehaviour {
 			}
 			else totalLength += curveLength;
 		}
-		
+
 		if(firstPoint == null)
 		{
 			firstPoint = points[points.Length - 1];
 			secondPoint = points[0];
 			curveLength = ApproximateLength(firstPoint, secondPoint, resolution);
 		}
-		
+
 		distance -= totalLength;
 		return GetPoint(distance / curveLength, firstPoint, secondPoint);
 	}
