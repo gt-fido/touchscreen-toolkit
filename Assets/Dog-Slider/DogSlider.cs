@@ -227,15 +227,38 @@ public class DogSlider : MonoBehaviour {
 	}
 
 	private Vector2[] GetPointsSurrounding(Vector3[] points) {
-		Vector2[] sur_pnts = new Vector2[points.Length * 2];
+		int length = points.Length * 2 + 3;
+		Vector2[] sur_pnts = new Vector2[length];
 		float fullWidth = sliderColliderWidth + sliderWidth;
+
+		Vector2 dir, pos_nine, neg_nine;
+
 		for(int i = 1; i < points.Length; i++) {
-			Vector2 dir = points[i] - points[i-1];
-			Vector2 pos_nine = dir.normalized.Rotate(90);
-			Vector2 neg_nine = dir.normalized.Rotate(-90);
+			dir = points[i] - points[i-1];
+			pos_nine = dir.normalized.Rotate(90);
+			neg_nine = dir.normalized.Rotate(-90);
 			sur_pnts[i] = pos_nine * fullWidth + (Vector2)points[i];
-			sur_pnts[i + points.Length] = neg_nine * fullWidth + (Vector2)points[i];
+			sur_pnts[length - 2 - i] = neg_nine * fullWidth + (Vector2)points[i];
 		}
+		// Make endpoints to connect last and first segments of line
+		dir = sur_pnts[2] - sur_pnts[1];
+		dir = dir.normalized.Rotate(180);
+		sur_pnts[0] = dir * fullWidth + sur_pnts[1];
+		sur_pnts[length-1] = sur_pnts[0];
+
+		dir = sur_pnts[length-4] - sur_pnts[length-3];
+		dir = dir.normalized.Rotate(180);
+		sur_pnts[length-2] = dir * fullWidth + sur_pnts[length-3];
+
+		// Make midpoints connect
+		dir = sur_pnts[points.Length - 2] - sur_pnts[points.Length - 1];
+		dir = dir.normalized.Rotate(180);
+		sur_pnts[points.Length] = dir * fullWidth + sur_pnts[points.Length - 1];
+
+		dir = sur_pnts[points.Length + 3] - sur_pnts[points.Length + 2];
+		dir = dir.normalized.Rotate(180);
+		dir = sur_pnts[points.Length + 1] = dir * fullWidth + sur_pnts[points.Length + 2];
+
 		return sur_pnts;
 	}
 
