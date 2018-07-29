@@ -8,18 +8,16 @@ public class HandleController : MonoBehaviour
      , IPointerUpHandler
      , IDragHandler{
 
-	private Handle _handle;
-    private BezierCurve _bezier;
     private float yOffset;
     private float xOffset;
-    [SerializeField]
-    private float startingPercent = 0f;
+    public float startingPercent {get; private set;}
     private Vector3 velocity;
+    private Rigidbody2D _handle_body;
+    private int current_closest_index;
 
 	// Use this for initialization
 	void Awake () {
-		_handle = gameObject.GetComponent<Handle>();
-        _bezier = transform.parent.gameObject.GetComponentInChildren<BezierCurve>();
+        _handle_body = gameObject.GetComponent<Rigidbody2D>();
 	}
 
     void Start () {
@@ -28,17 +26,12 @@ public class HandleController : MonoBehaviour
         var rect = (cnvs.transform as RectTransform).rect;
         yOffset = -1 * rect.height / 2f;
         xOffset = -1 * rect.width / 2f;
-
-        // TODO: Have handle start at beginning of slider
-        _handle.transform.position = _bezier.GetPointAt(startingPercent);
-    }
-
-    void Update(){
+        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(startingPercent);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _handle.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _handle_body.velocity = Vector2.zero;
     }
 
 
@@ -48,13 +41,13 @@ public class HandleController : MonoBehaviour
         Debug.Log(yOffset);
         Debug.Log(xOffset);
         Vector2 scaled = new Vector2(eventData.position.x + xOffset, eventData.position.y + yOffset) / transform.localScale;
-        _handle.GetComponent<Rigidbody2D>().MovePosition(scaled);
+        _handle_body.MovePosition(scaled);
         // this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
         velocity = eventData.delta * transform.localScale;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _handle.GetComponent<Rigidbody2D>().velocity = velocity;
+        _handle_body.velocity = velocity;
     }
 }
