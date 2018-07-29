@@ -8,6 +8,7 @@ public class DogSlider : MonoBehaviour {
 	public enum Parts {
 		Slider,
 		Handle,
+		Handle_Outline,
 		Progress
 	}
 
@@ -44,13 +45,17 @@ public class DogSlider : MonoBehaviour {
 	[SerializeField]
 	private RigidbodyType2D handlePhysics = RigidbodyType2D.Static;
 
-
 	private LineRenderer lr_track;
 	private BezierCurve _curve;
 	private Handle _handle;
 	private HandleController _handle_control;
 	private GameObject _lines;
 
+	public float percent {
+		get{
+			return _handle_control.percent;
+		}
+	}
 
 	public Vector3[] sampled_line_points {
 		get{
@@ -80,8 +85,10 @@ public class DogSlider : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(lr_track.material.color != sliderBackground)
-			lr_track.material.color = sliderBackground;
+		// Slider update
+		// TODO
+
+		// Handle update
 		if(_handle.fill_color != handleFillColor)
 			_handle.SetFillColor(handleFillColor);
 		if(_handle.border_color != handleBorderColor)
@@ -122,6 +129,9 @@ public class DogSlider : MonoBehaviour {
 			case Parts.Slider:
 				sliderBackground = color;
 				break;
+			case Parts.Handle_Outline:
+				handleBorderColor = color;
+				break;
 			default:
 				break;
 		}
@@ -136,6 +146,8 @@ public class DogSlider : MonoBehaviour {
 				return sliderProgress;
 			case Parts.Slider:
 				return sliderBackground;
+			case Parts.Handle_Outline:
+				return handleBorderColor;
 			default:
 				return Color.black;
 		}
@@ -150,8 +162,8 @@ public class DogSlider : MonoBehaviour {
 
         // Otherwise rotate to the new degree
         this.transform.localEulerAngles = new Vector3(0.0f,0.0f,degree);
-		OnDisable();
-		OnEnable();
+		this.enabled = false;
+		this.enabled = true;
 
         // TODO: Intelligently change scale to keep in frame
    }
@@ -161,6 +173,13 @@ public class DogSlider : MonoBehaviour {
 			return;
 
 		handleRadius = radius;
+   }
+
+   public void SetHandleBorderWidth(float width) {
+		if(Mathf.Abs(this.handleBorderWidth - width) <= 0.1f)
+			return;
+
+		handleBorderWidth = width;
    }
 
    public void SetWidth(float width) {
@@ -179,8 +198,8 @@ public class DogSlider : MonoBehaviour {
 			return;
 
 		trans.localScale = new Vector3(scale, _curve.transform.localScale.y, _curve.transform.localScale.z);
-		OnDisable();
-		OnEnable();
+		this.enabled = false;
+		this.enabled = true;
 	}
 
 	public void SetYScale(float scale) {
@@ -190,8 +209,8 @@ public class DogSlider : MonoBehaviour {
 			return;
 
 		trans.localScale = new Vector3(_curve.transform.localScale.x, scale, _curve.transform.localScale.z);
-		OnDisable();
-		OnEnable();
+		this.enabled = false;
+		this.enabled = true;
 	}
 
     public void SetHeight(float height) {
@@ -210,10 +229,14 @@ public class DogSlider : MonoBehaviour {
 			DrawCurve();
 
 		_lines.transform.localPosition = Vector3.zero;
+		_handle.enabled = true;
+		_handle_control.enabled = true;
 	}
 
 	void OnDisable(){
 		GameObject.DestroyImmediate(_lines);
+		_handle.enabled = false;
+		_handle_control.enabled = false;
 		// TODO: Don't destroy but reset handle on disable
 	}
 
@@ -310,6 +333,10 @@ public class DogSlider : MonoBehaviour {
         }
         Color color = new Color(red, green, blue, 1.0F);
         setColor(slider, color);
+	}
+
+	public void SetHandleFill(bool value) {
+		handleFill = value;
 	}
 }
 

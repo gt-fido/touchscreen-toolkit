@@ -36,6 +36,12 @@ public class HandleController : MonoBehaviour
         _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0);
     }
 
+    void OnDisable() {
+        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0);
+        percent = 0f;
+        current_closest_index = 0;
+    }
+
     void Update() {
         if(_handle_body.velocity != Vector2.zero || dragging){
             UpdatePercent();
@@ -44,7 +50,7 @@ public class HandleController : MonoBehaviour
 
     private void UpdatePercent(){
         var samples = _dog_slider.sampled_line_points;
-        Vector3 cur = _handle_body.transform.localPosition;
+        Vector3 cur = _handle_body.transform.position;
 
         int start = current_closest_index - 10 < 0 ? 0 : current_closest_index - 10; 
         int end = current_closest_index + 10 < samples.Length ? current_closest_index + 10 : samples.Length - 1;
@@ -59,7 +65,7 @@ public class HandleController : MonoBehaviour
                 min_dist = temp;
             }
         }
-        percent = position_length_info[min_idx] / _dog_slider.curveLength;
+        percent = Mathf.Round(position_length_info[min_idx] * 1000f / _dog_slider.curveLength) / 1000f;
         current_closest_index = min_idx;
         Debug.Log(percent);
     }

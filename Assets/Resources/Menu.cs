@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour {
 
 	public enum Elements {
 		Handle,
+		Handle_Outline,
 		Background,
 		Fill,
 		Empty,
@@ -52,6 +53,8 @@ public class Menu : MonoBehaviour {
 			return slider.getColor(DogSlider.Parts.Slider);
 		else if(el == Elements.Fill)
 			return slider.getColor(DogSlider.Parts.Progress);
+		else if(el == Elements.Handle_Outline)
+			return slider.getColor(DogSlider.Parts.Handle_Outline);
 		else
 			return Color.black;
 	}
@@ -65,6 +68,8 @@ public class Menu : MonoBehaviour {
 			slider.setColor(DogSlider.Parts.Slider, color);
 		else if(el == Elements.Fill)
 			slider.setColor(DogSlider.Parts.Progress, color);
+		else if(el == Elements.Handle_Outline)
+			slider.setColor(DogSlider.Parts.Handle_Outline, color);
 	}
 
 	public void focusOnElement(string element){
@@ -79,5 +84,9 @@ public class Menu : MonoBehaviour {
 		// Debug.Log("Setting color to: " + color);
 		if(this.focusedElement != Elements.None)
 			setElementColor(this.focusedElement, color);
+	}
+
+	public void setHandleFill(bool value){
+		slider.SetHandleFill(value);
 	}
 }
