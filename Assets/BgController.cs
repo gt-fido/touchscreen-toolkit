@@ -5,25 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class BgController : MonoBehaviour {
-
-    public Button button;
-    public Slider slider;
-    public Material color;
+    public Color start;
+    public Color end;
+    private DogSlider slider;
+    private Camera cam;
 	// Use this for initialization
-	void Start () {
-        color.color = UnityEngine.Color.blue;
-        
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-        
-	}
+    private void Awake() {
+        cam = Camera.main;
+        slider = FindObjectOfType(typeof(DogSlider)) as DogSlider;
+    }
 
     public void adjustColor(float change) {
-        color.color = Color.Lerp(UnityEngine.Color.blue, UnityEngine.Color.yellow, change);
-        
+        cam.backgroundColor = Color.Lerp(start, end, change);
     }
 }

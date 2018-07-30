@@ -326,22 +326,22 @@ public class DogSlider : MonoBehaviour {
 		return sur_pnts;
 	}
 
-	private void PercentageColorChange(float percent, Parts slider=Parts.Slider) {
-	    // Necessary for the rgb multiplier
-		float red, green, blue;
-	    if(percent < 50.0) {
-	        red   = 0;
-	        green = 0 + (percent * 2);
-	        blue  = 100 - (percent * 2);
-	    }
-        else {
-	        red   = (percent - 50) * 2;
-	        green = 100;
-	        blue  = 0;
-        }
-        Color color = new Color(red, green, blue, 1.0F);
-        setColor(slider, color);
-	}
+	// private void PercentageColorChange(float percent, Parts slider=Parts.Slider) {
+	//     // Necessary for the rgb multiplier
+	// 	float red, green, blue;
+	//     if(percent < 50.0) {
+	//         red   = 0;
+	//         green = 0 + (percent * 2);
+	//         blue  = 100 - (percent * 2);
+	//     }
+    //     else {
+	//         red   = (percent - 50) * 2;
+	//         green = 100;
+	//         blue  = 0;
+    //     }
+    //     Color color = new Color(red, green, blue, 1.0F);
+    //     setColor(slider, color);
+	// }
 
 	public void SetHandleFill(bool value) {
 		handleFill = value;
