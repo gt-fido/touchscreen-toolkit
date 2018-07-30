@@ -18,6 +18,8 @@ public class HandleController : MonoBehaviour
     private int current_closest_index;
     private DogSlider _dog_slider;
 
+    private Vector3 start_point;
+
     public float[] position_length_info {get; private set;}
     private float _percent;
     public float percent {
@@ -44,11 +46,12 @@ public class HandleController : MonoBehaviour
         yOffset = -1 * rect.height / 2f;
         xOffset = -1 * rect.width / 2f;
         // _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(startingPercent);
-        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0);
+        start_point = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0) + new Vector3(0, 0, -10);
+        _handle_body.transform.position = start_point;
     }
 
     void OnDisable() {
-        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0);
+        _handle_body.transform.position = start_point;
         percent = 0f;
         current_closest_index = 0;
     }
