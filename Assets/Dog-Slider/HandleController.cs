@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class HandleController : MonoBehaviour
      , IPointerDownHandler // 2
@@ -18,8 +19,18 @@ public class HandleController : MonoBehaviour
     private DogSlider _dog_slider;
 
     public float[] position_length_info {get; private set;}
-    public float percent {get; private set;}
-
+    private float _percent;
+    public float percent {
+        get{
+            return _percent;
+        } private set{
+            if(_percent == value) return;
+            _percent = value;
+            if(_dog_slider.percentChanged != null)
+                _dog_slider.percentChanged.Invoke(_percent);
+        }
+    }
+    
 	// Use this for initialization
 	void Awake () {
         _handle_body = gameObject.GetComponent<Rigidbody2D>();
@@ -67,7 +78,7 @@ public class HandleController : MonoBehaviour
         }
         percent = Mathf.Round(position_length_info[min_idx] * 1000f / _dog_slider.curveLength) / 1000f;
         current_closest_index = min_idx;
-        Debug.Log(percent);
+        // Debug.Log(percent);
     }
 
     public void SetPositionLength(float[] arr){
