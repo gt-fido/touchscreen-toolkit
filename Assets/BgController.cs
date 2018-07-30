@@ -15,7 +15,20 @@ public class BgController : MonoBehaviour {
         slider = FindObjectOfType(typeof(DogSlider)) as DogSlider;
     }
 
-    public void adjustColor(float change) {
+    public void adjustBackgroundColor(float change) {
         cam.backgroundColor = Color.Lerp(start, end, change);
     }
+
+    public void adjustHandleColor(float change) {
+        slider.setColor(DogSlider.Parts.Handle, Color.Lerp(start, end, change));
+    }
+
+    public void adjustSliderColor(float change) {
+        slider.setColor(DogSlider.Parts.Slider, Color.Lerp(start, end, change));
+    }
+
+    public void adjustOutlineColor(float change) {
+        slider.setColor(DogSlider.Parts.Handle_Outline, Color.Lerp(start, end, change));
+    }
+
 }

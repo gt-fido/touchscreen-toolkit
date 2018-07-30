@@ -94,7 +94,8 @@ public class DogSlider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Slider update
-		// TODO
+		if(lr_track.sharedMaterial.color != sliderBackground)
+			lr_track.sharedMaterial.color = sliderBackground;
 
 		// Handle update
 		if(_handle.fill_color != handleFillColor)
@@ -255,8 +256,8 @@ public class DogSlider : MonoBehaviour {
 		_lines.transform.parent = this.transform;
 
 		lr_track = _lines.AddComponent<LineRenderer>();
-		lr_track.material = new Material(Shader.Find("Unlit/Color"));
-		lr_track.material.color = sliderBackground;
+		lr_track.sharedMaterial = new Material(Shader.Find("Unlit/Color"));
+		lr_track.sharedMaterial.color = sliderBackground;
 		lr_track.widthMultiplier = sliderWidth;
 		lr_track.numCapVertices = 10;
 
