@@ -16,15 +16,15 @@ public class Handle : MonoBehaviour {
 
 	public Color fill_color {
 		get{
-			return mr.material.color;
+			return mr.sharedMaterial.color;
 		} private set {
-			mr.material.color = value;
+			mr.sharedMaterial.color = value;
 		}}
 	public Color border_color {
 		get{
-			return lr.material.color;
+			return lr.sharedMaterial.color;
 		} private set {
-			lr.material.color = value;
+			lr.sharedMaterial.color = value;
 		}
 	}
 	public float border_width {
