@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [ExecuteInEditMode]
 public class DogSlider : MonoBehaviour {
@@ -45,12 +46,14 @@ public class DogSlider : MonoBehaviour {
 	[SerializeField]
 	private RigidbodyType2D handlePhysics = RigidbodyType2D.Static;
 
+	// Private Variables
 	private LineRenderer lr_track;
 	private BezierCurve _curve;
 	private Handle _handle;
 	private HandleController _handle_control;
 	private GameObject _lines;
 
+	// Fields
 	public float percent {
 		get{
 			return _handle_control.percent;
@@ -71,6 +74,11 @@ public class DogSlider : MonoBehaviour {
 		}
 	}
 
+	// Event system
+	[System.Serializable]
+	public class PercentChanged : UnityEvent<float> {}
+	public PercentChanged percentChanged;
+
 	// Use this for initialization
 	void Awake () {
 		_curve = gameObject.GetComponentInChildren<BezierCurve>();
@@ -79,8 +87,8 @@ public class DogSlider : MonoBehaviour {
 			lr_track = _lines.GetComponent<LineRenderer>();
 		_handle = gameObject.GetComponentInChildren<Handle>();
 		_handle_control = gameObject.GetComponentInChildren<HandleController>();
-		OnDisable();
-		OnEnable();
+		enabled = false;
+		enabled = true;
 	}
 
 	// Update is called once per frame
