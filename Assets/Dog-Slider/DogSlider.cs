@@ -52,6 +52,8 @@ public class DogSlider : MonoBehaviour {
 	private Handle _handle;
 	private HandleController _handle_control;
 	private GameObject _lines;
+	private Canvas _canvas;
+	private Rect _canvas_proportions;
 
 	// Fields
 	public float percent {
@@ -87,6 +89,19 @@ public class DogSlider : MonoBehaviour {
 			lr_track = _lines.GetComponent<LineRenderer>();
 		_handle = gameObject.GetComponentInChildren<Handle>();
 		_handle_control = gameObject.GetComponentInChildren<HandleController>();
+        _canvas = GameObject.FindObjectOfType<Canvas>();
+		enabled = false;
+		enabled = true;
+	}
+
+	// void FixedUpdate() {
+    //     if(_canvas.transform.hasChanged){
+
+	// 	}
+	// }
+
+	private void OnRectTransformDimensionsChange()
+	{
 		enabled = false;
 		enabled = true;
 	}

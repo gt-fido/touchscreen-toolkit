@@ -53,6 +53,14 @@ public class HandleController : MonoBehaviour
         current_closest_index = 0;
     }
 
+    void OnEnable() {
+        Canvas cnvs = GameObject.FindObjectOfType<Canvas>();
+        var rect = (cnvs.transform as RectTransform).rect;
+        yOffset = -1 * rect.height / 2f;
+        xOffset = -1 * rect.width / 2f;
+
+    }
+
     void Update() {
         if(_handle_body.velocity != Vector2.zero || dragging){
             UpdatePercent();

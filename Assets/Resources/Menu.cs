@@ -20,16 +20,12 @@ public class Menu : MonoBehaviour {
 
 	public Elements focusedElement = Elements.None;
 
-    public Color c_start = Color.blue;
-    public Color c_end = Color.yellow;
-    
     private Camera cam;
 
 	InputField color_pkr;
 
 	void Start() {
 		this.cam = Camera.FindObjectOfType<Camera>();
-		this.cam.backgroundColor = c_start;
 		panelTrans = GetComponent<RectTransform>();
 		color_pkr = GameObject.FindGameObjectWithTag("color_picker").GetComponent<InputField>();
 	}
