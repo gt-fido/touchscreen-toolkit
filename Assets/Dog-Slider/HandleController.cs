@@ -54,11 +54,6 @@ public class HandleController : MonoBehaviour
     }
 
     void OnEnable() {
-        Canvas cnvs = GameObject.FindObjectOfType<Canvas>();
-        var rect = (cnvs.transform as RectTransform).rect;
-        yOffset = -1 * rect.height / 2f;
-        xOffset = -1 * rect.width / 2f;
-
     }
 
     void Update() {
@@ -97,18 +92,26 @@ public class HandleController : MonoBehaviour
     {
         _handle_body.velocity = Vector2.zero;
         dragging = true;
+        Debug.Log(eventData.pointerCurrentRaycast.worldPosition);
     }
 
 
 
     public void OnDrag(PointerEventData eventData)
     {
+        
         // Debug.Log(yOffset);
         // Debug.Log(xOffset);
-        Vector2 scaled = new Vector2(eventData.position.x + xOffset, eventData.position.y + yOffset) / transform.localScale;
-        _handle_body.MovePosition(scaled);
-        // this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
-        velocity = eventData.delta * transform.localScale;
+        // Vector2 scaled = new Vector2(eventData.position.x + xOffset, eventData.position.y + yOffset) / transform.localScale;
+        if(eventData.pointerCurrentRaycast.gameObject && dragging)
+        {
+            Vector2 scaled = (Vector2)eventData.pointerCurrentRaycast.worldPosition;
+            _handle_body.MovePosition(scaled);
+            // this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
+            velocity = eventData.delta * transform.localScale;
+        } else {
+            OnPointerUp(eventData);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

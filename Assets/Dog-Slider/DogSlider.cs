@@ -22,11 +22,11 @@ public class DogSlider : MonoBehaviour {
 	[SerializeField]
 	private Color sliderProgress;
 	[SerializeField]
-	private float sliderWidth = 1.0f;
+	private float sliderWidth;
 	[SerializeField]
-	private float sliderLength = 1.0f;
+	private float sliderLength;
 	[SerializeField]
-	private float sliderColliderWidth = 1.0f;
+	private float sliderColliderWidth;
 
 	[Header("Handle Properties")]
 	[SerializeField]
@@ -94,16 +94,13 @@ public class DogSlider : MonoBehaviour {
 		enabled = true;
 	}
 
-	// void FixedUpdate() {
-    //     if(_canvas.transform.hasChanged){
-
-	// 	}
-	// }
-
-	private void OnRectTransformDimensionsChange()
-	{
-		enabled = false;
-		enabled = true;
+	void FixedUpdate() {
+        if(_canvas.transform.hasChanged){
+			Debug.Log("Changed");
+			OnDisable();
+			OnEnable();
+			_canvas.transform.hasChanged = false;
+		}
 	}
 
 	// Update is called once per frame
