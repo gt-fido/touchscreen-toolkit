@@ -16,20 +16,22 @@ public class DogSlider : MonoBehaviour {
 	[Header("Slider Properties")]
 	// Reference to the curve instantiated further down the inheritance tree
 	[SerializeField]
+	[Range(5, 100)]
 	private int sliderResolution = 30;
 	[SerializeField]
 	private Color sliderBackground;
 	[SerializeField]
 	private Color sliderProgress;
 	[SerializeField]
+	[Range(0.5f, 10f)]
 	private float sliderWidth;
 	[SerializeField]
-	private float sliderLength;
-	[SerializeField]
+	[Range(0.5f, 5f)]
 	private float sliderColliderWidth;
 
 	[Header("Handle Properties")]
 	[SerializeField]
+	[Range(3, 100)]
 	private int handleResolution = 10;
 	[SerializeField]
 	private Color handleFillColor;
@@ -40,8 +42,10 @@ public class DogSlider : MonoBehaviour {
 	[SerializeField]
 	private bool handleFill = true;
 	[SerializeField]
+	[Range(0f, 5.0f)]
 	private float handleBorderWidth = 0.2f;
 	[SerializeField]
+	[Range(0f, 10f)]
 	private float handleRadius = 5f;
 	[SerializeField]
 	private RigidbodyType2D handlePhysics = RigidbodyType2D.Static;
@@ -319,13 +323,13 @@ public class DogSlider : MonoBehaviour {
 		}
 		// Make endpoints to connect last and first segments of line
 		dir = sur_pnts[2] - sur_pnts[1];
-		dir = dir.normalized.Rotate(180);
-		sur_pnts[0] = dir * fullWidth + sur_pnts[1];
+		dir = dir.Rotate(180);
+		sur_pnts[0] = dir.normalized * fullWidth + dir + sur_pnts[1];
 		sur_pnts[length-1] = sur_pnts[0];
 
 		dir = sur_pnts[length-4] - sur_pnts[length-3];
-		dir = dir.normalized.Rotate(180);
-		sur_pnts[length-2] = dir * fullWidth + sur_pnts[length-3];
+		dir = dir.Rotate(180);
+		sur_pnts[length-2] = dir + dir.normalized * fullWidth + sur_pnts[length-3];
 
 		// Make midpoints connect
 		dir = sur_pnts[points.Length - 2] - sur_pnts[points.Length - 1];
