@@ -48,7 +48,7 @@ public class DogSlider : MonoBehaviour {
 	[Range(0f, 10f)]
 	private float handleRadius = 5f;
 	[SerializeField]
-	private RigidbodyType2D handlePhysics = RigidbodyType2D.Static;
+	private bool physics = true;
 
 	// Private Variables
 	private LineRenderer lr_track;
@@ -128,8 +128,8 @@ public class DogSlider : MonoBehaviour {
 			_handle.SetFill(handleFill);
 		if(_handle.close != handleClose)
 			_handle.SetClosed(handleClose);
-		if(_handle.physics != handlePhysics)
-			_handle.SetPhysics(handlePhysics);
+		if(_handle_control.physics != physics)
+			_handle_control.SetPhysics(physics);
 
 		if(_curve.resolution != sliderResolution)
 			_curve.resolution = sliderResolution;
@@ -140,6 +140,10 @@ public class DogSlider : MonoBehaviour {
 			_handle.dirty_flag = false;
 		}
 
+	}
+
+	public void SetPhysics(bool physics) {
+		this.physics = physics;
 	}
 
 	public void setColor(Parts part, Color color) {
@@ -342,23 +346,6 @@ public class DogSlider : MonoBehaviour {
 
 		return sur_pnts;
 	}
-
-	// private void PercentageColorChange(float percent, Parts slider=Parts.Slider) {
-	//     // Necessary for the rgb multiplier
-	// 	float red, green, blue;
-	//     if(percent < 50.0) {
-	//         red   = 0;
-	//         green = 0 + (percent * 2);
-	//         blue  = 100 - (percent * 2);
-	//     }
-    //     else {
-	//         red   = (percent - 50) * 2;
-	//         green = 100;
-	//         blue  = 0;
-    //     }
-    //     Color color = new Color(red, green, blue, 1.0F);
-    //     setColor(slider, color);
-	// }
 
 	public void SetHandleFill(bool value) {
 		handleFill = value;

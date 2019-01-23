@@ -41,13 +41,6 @@ public class Handle : MonoBehaviour {
 			lr.loop = value;
 		}}
 
-	public RigidbodyType2D physics {
-		get{
-			return rb.bodyType;
-		} private set {
-			rb.bodyType = value;
-		}}
-
 	private LineRenderer lr;
 	private Rigidbody2D rb;
 	private CircleCollider2D cc2d;
@@ -70,10 +63,6 @@ public class Handle : MonoBehaviour {
 
 	public void Update() {
 
-	}
-
-	public void SetPhysics(RigidbodyType2D rbtype){
-		physics = rbtype;
 	}
 
 	public void SetResolution(int res){

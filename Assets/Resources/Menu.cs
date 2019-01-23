@@ -9,8 +9,8 @@ public class Menu : MonoBehaviour {
 		Handle,
 		Handle_Outline,
 		Background,
-		Fill,
 		Empty,
+		Fill,
 		None
 	}
 
@@ -68,8 +68,8 @@ public class Menu : MonoBehaviour {
 			slider.setColor(DogSlider.Parts.Handle_Outline, color);
 	}
 
-	public void focusOnElement(string element){
-		Elements el = (Elements) System.Enum.Parse(typeof(Elements), element, true);
+	public void focusOnElement(int element){
+		Elements el = (Elements) element;
 		this.focusedElement = el;
 		color_pkr.text = ColorUtility.ToHtmlStringRGB(getElementColor(el));
 		color_pkr.onEndEdit.Invoke(color_pkr.text);
@@ -84,5 +84,33 @@ public class Menu : MonoBehaviour {
 
 	public void setHandleFill(bool value){
 		slider.SetHandleFill(value);
+	}
+
+	public void setPhysics(bool physics) {
+		slider.SetPhysics(physics);
+	}
+
+	public void rotateSlider(float degree) {
+		slider.RotateSlider(degree);
+	}
+
+	public void setHandleRadius(float radius) {
+		slider.SetHandleRadius(radius);
+	}
+
+	public void setTrackWidth(float width) {
+		slider.SetWidth(width);
+	}
+
+	public void setSliderYScale(float scale) {
+		slider.SetYScale(scale);
+	}
+
+	public void setSliderXScale(float scale) {
+		slider.SetXScale(scale);
+	}
+
+	public void setHandleOutlineWidth(float width) {
+		slider.SetHandleBorderWidth(width);
 	}
 }

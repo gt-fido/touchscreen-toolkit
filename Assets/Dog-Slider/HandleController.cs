@@ -9,8 +9,6 @@ public class HandleController : MonoBehaviour
      , IPointerUpHandler
      , IDragHandler{
 
-    private float yOffset;
-    private float xOffset;
     private bool dragging;
     public float startingPercent {get; private set;}
     private Vector3 velocity;
@@ -18,6 +16,7 @@ public class HandleController : MonoBehaviour
     private int current_closest_index;
     private DogSlider _dog_slider;
 
+    public bool physics {get; private set;}
     public float[] position_length_info {get; private set;}
     private float _percent;
     public float percent {
@@ -41,14 +40,12 @@ public class HandleController : MonoBehaviour
         // Find screen size and calculate necessary offset
         Canvas cnvs = GameObject.FindObjectOfType<Canvas>();
         var rect = (cnvs.transform as RectTransform).rect;
-        yOffset = -1 * rect.height / 2f;
-        xOffset = -1 * rect.width / 2f;
         // _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(startingPercent);
-        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0) + new Vector3(0, 0, -10);
+        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0) + new Vector3(0, 0, -1);
     }
 
     void OnDisable() {
-        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0) + new Vector3(0, 0, -10);
+        _handle_body.transform.position = transform.parent.gameObject.GetComponentInChildren<BezierCurve>().GetPointAt(0) + new Vector3(0, 0, -1);
         percent = 0f;
         current_closest_index = 0;
     }
@@ -88,6 +85,12 @@ public class HandleController : MonoBehaviour
         position_length_info = arr;
     }
 
+	public void SetPhysics(bool physics){
+		this.physics = physics;
+        _handle_body.velocity = Vector2.zero;
+        _handle_body.gravityScale = physics ? 1.0f : 0.0f;
+	}
+
     public void OnPointerDown(PointerEventData eventData)
     {
         _handle_body.velocity = Vector2.zero;
@@ -109,14 +112,15 @@ public class HandleController : MonoBehaviour
             _handle_body.MovePosition(scaled);
             // this.transform.localPosition = new Vector3(eventData.position.x + xOffset, eventData.position.y + yOffset, 0f);
             velocity = eventData.delta * transform.localScale;
-        } else {
+        } else if (dragging) {
             OnPointerUp(eventData);
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _handle_body.velocity = velocity;
+        if(physics)
+            _handle_body.velocity = velocity;
         dragging = false;
     }
 }
